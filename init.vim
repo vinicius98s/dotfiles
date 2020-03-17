@@ -1,5 +1,10 @@
 call plug#begin()
 
+Plug 'itchyny/lightline.vim'
+Plug 'flrnd/candid.vim'
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'fatih/vim-go'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -7,7 +12,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'joshdick/onedark.vim' 
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
@@ -61,7 +66,14 @@ let g:move_key_modifier = 'C'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 syntax on
-colorscheme onedark
+set background=dark
+set termguicolors
+
+let g:lightline = { 'colorscheme': 'candid' }
+let g:candid_color_store = {
+    \ "black": {"gui": "#0A0A16", "cterm256": "0"},
+    \}
+colorscheme candid
 
 set relativenumber
 set hidden
