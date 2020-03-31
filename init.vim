@@ -1,5 +1,6 @@
 call plug#begin()
 
+Plug 'jparise/vim-graphql'
 Plug 'itchyny/lightline.vim'
 Plug 'flrnd/candid.vim'
 Plug 'Rigellute/shades-of-purple.vim'
