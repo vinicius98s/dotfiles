@@ -89,6 +89,10 @@ colorscheme candid
 
 let g:NERDSpaceDelims = 2
 
+" Clear highlight search on escape
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
+
 set relativenumber
 set hidden
 set number
