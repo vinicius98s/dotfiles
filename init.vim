@@ -6,6 +6,8 @@ Plug 'flrnd/candid.vim'
 Plug 'Rigellute/shades-of-purple.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'fatih/vim-go'
+Plug 'preservim/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -26,6 +28,10 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
+
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -80,6 +86,8 @@ let g:candid_color_store = {
     \ "black": {"gui": "#0A0A16", "cterm256": "0"},
     \}
 colorscheme candid
+
+let g:NERDSpaceDelims = 2
 
 set relativenumber
 set hidden
