@@ -21,8 +21,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
-
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
@@ -30,6 +30,8 @@ call plug#end()
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 nmap <C-b> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden = 1
+let g:NerdTreeMinimalUI = 1
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 
@@ -59,7 +61,10 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
-  \ 'coc-json', 
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-emmet'
   \ ]
 
 let g:move_key_modifier = 'C'
