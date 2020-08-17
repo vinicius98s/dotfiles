@@ -16,7 +16,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'joshdick/onedark.vim' 
 " Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'ctrlpvim/ctrlp.vim' 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
 " Plug 'roxma/nvim-completion-manager'
@@ -35,6 +35,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 nmap <C-b> :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden = 1
 let g:NerdTreeMinimalUI = 1
@@ -42,7 +44,7 @@ let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 
 " sync open file with NERDTree
-" " Check if NERDTree is open or active
+" Check if NERDTree is open or active
 function! IsNERDTreeOpen()        
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
