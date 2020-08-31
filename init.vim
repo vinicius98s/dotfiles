@@ -1,5 +1,6 @@
 call plug#begin()
 
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'itchyny/lightline.vim'
 Plug 'flrnd/candid.vim'
@@ -87,7 +88,12 @@ let g:lightline = { 'colorscheme': 'candid' }
 let g:candid_color_store = {
     \ "black": {"gui": "#0A0A16", "cterm256": "0"},
     \}
-colorscheme candid
+
+let g:material_theme_style = 'ocean'
+let g:material_terminal_italics = 1
+colorscheme material
+
+" colorscheme candid
 
 let g:NERDSpaceDelims = 2
 
