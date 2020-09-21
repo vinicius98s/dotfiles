@@ -1,5 +1,6 @@
 call plug#begin()
 
+Plug 'reasonml-editor/vim-reason-plus'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'itchyny/lightline.vim'
