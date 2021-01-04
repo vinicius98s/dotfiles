@@ -1,5 +1,7 @@
 call plug#begin()
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
@@ -36,6 +38,24 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" Open files and global search
+nnoremap <c-p> :Files<cr>
+nnoremap <c-f> :Ag<cr>
+
+" Navigate between panels with ALT+{H,J,K,L}
+:tnoremap <A-h> <C-\><C-N><C-w>h
+:tnoremap <A-j> <C-\><C-N><C-w>j
+:tnoremap <A-k> <C-\><C-N><C-w>k
+:tnoremap <A-l> <C-\><C-N><C-w>l
+:inoremap <A-h> <C-\><C-N><C-w>h
+:inoremap <A-j> <C-\><C-N><C-w>j
+:inoremap <A-k> <C-\><C-N><C-w>k
+:inoremap <A-l> <C-\><C-N><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
 
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
@@ -113,3 +133,6 @@ set shiftwidth=2
 " always uses spaces instead of tab characters
 set expandtab
 set encoding=UTF-8
+" open new split panes to right and below
+set splitright
+set splitbelow
