@@ -6,7 +6,7 @@ First, you need to install the [Neovim](https://github.com/neovim/neovim/wiki/In
 Then you can clone it in your `.config` folder:
 ```sh
 cd ~/.config
-git clone https://github.com/vinicius98s/nvim-config nvim
+git clone https://github.com/vinicius98s/nvim
 ```
 
 ### Installing the plugins
