@@ -1,6 +1,8 @@
 call plug#begin()
 
-Plug 'elixir-lang/vim-elixir'
+Plug 'dense-analysis/ale'
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'elixir-editors/vim-elixir'
 Plug 'thinca/vim-ref'
 Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'tpope/vim-fugitive'
@@ -27,7 +29,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
 " Plug 'roxma/nvim-completion-manager'
-Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
 Plug 'leafgarland/typescript-vim'
@@ -105,6 +106,7 @@ endfunction
 autocmd BufEnter * call SyncTree()
 
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -121,6 +123,9 @@ let g:coc_global_extensions = [
 let g:move_key_modifier = 'C'
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Elixir formatter
+let g:ale_fixers = { 'elixir': ['mix_format'] }
 
 syntax on
 set background=dark
