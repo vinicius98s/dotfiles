@@ -12,6 +12,8 @@ git clone https://github.com/vinicius98s/nvim
 ### Installing the plugins
 Just open the Neovim with `nvim` command, then type `:PlugInstall`
 
+#### Don't forget to install [this](https://github.com/ggreer/the_silver_searcher) to have Ctrl + F
+
 ### Troubleshooting
 You might get some error messages when started, a useful command to get them solved is just run `:checkhealth provider`
 
