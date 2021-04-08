@@ -1,5 +1,6 @@
 call plug#begin()
 
+Plug 'lambdalisue/gina.vim'
 Plug 'dense-analysis/ale'
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
 Plug 'elixir-editors/vim-elixir'
