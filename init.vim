@@ -1,20 +1,27 @@
 call plug#begin()
 
-Plug 'lambdalisue/gina.vim'
-Plug 'dense-analysis/ale'
+" Themes
+Plug 'aonemd/quietlight.vim'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'joshdick/onedark.vim' 
+Plug 'flrnd/candid.vim'
+
+" Elixir
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
-Plug 'elixir-editors/vim-elixir'
+
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'dense-analysis/ale'
+Plug 'lambdalisue/gina.vim'
 Plug 'thinca/vim-ref'
-Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'reasonml-editor/vim-reason-plus'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
-Plug 'itchyny/lightline.vim'
-Plug 'flrnd/candid.vim'
-Plug 'Rigellute/shades-of-purple.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'fatih/vim-go'
 Plug 'preservim/nerdcommenter'
@@ -24,12 +31,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-Plug 'joshdick/onedark.vim' 
-" Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim' 
-Plug 'terryma/vim-multiple-cursors'
 Plug 'sheerun/vim-polyglot'
-" Plug 'roxma/nvim-completion-manager'
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
 Plug 'leafgarland/typescript-vim'
@@ -69,7 +72,15 @@ nmap <leader>gf :diffget //2<CR>
 
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
-nmap <C-b> :NERDTreeToggle<CR>
+nmap <C-b> :call NERDTreeToggleAndRefresh()<CR>
+
+function NERDTreeToggleAndRefresh()
+  :NERDTreeToggle
+  if g:NERDTree.IsOpen()
+    :NERDTreeRefreshRoot
+  endif
+endfunction
+
 let g:NERDTreeShowHidden = 1
 let g:NerdTreeMinimalUI = 1
 let g:NERDTreeGitStatusWithFlags = 1
@@ -125,23 +136,24 @@ let g:move_key_modifier = 'C'
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" Elixir formatter
-let g:ale_fixers = { 'elixir': ['mix_format'] }
+let g:ale_completion_autoimport = 1
+let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'] }
 
 syntax on
-set background=dark
 set termguicolors
 
-let g:lightline = { 'colorscheme': 'candid' }
-let g:candid_color_store = {
-    \ "black": {"gui": "#0A0A16", "cterm256": "0"},
-    \}
 
+set background=dark
+
+let g:airline_theme = 'material'
 let g:material_theme_style = 'ocean'
 let g:material_terminal_italics = 1
-colorscheme material
+colorscheme material 
 
 " colorscheme candid
+" let g:candid_color_store = {
+    " \ "black": {"gui": "#0A0A16", "cterm256": "0"},
+    " \}
 
 let g:NERDSpaceDelims = 2
 
