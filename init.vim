@@ -1,11 +1,14 @@
 call plug#begin()
 
 " Themes
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'aonemd/quietlight.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'Rigellute/shades-of-purple.vim'
 Plug 'joshdick/onedark.vim' 
 Plug 'flrnd/candid.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " Elixir
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
@@ -65,6 +68,18 @@ nnoremap <c-f> :Ag<cr>
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
 
+:let mapleader = " "
+
+" tabs
+map <leader>t<leader> :tabnext
+map <leader>tm :tabmove
+map <leader>tc :tabclose<CR>
+map <leader>to :tabonly<CR>
+nmap <leader>tn :tabnew<CR>
+let g:lasttab = 1
+nmap <leader>lt :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
 " git
 nmap <leader>g :G<CR>
 nmap <leader>gj :diffget //3<CR>
@@ -81,6 +96,8 @@ function NERDTreeToggleAndRefresh()
   endif
 endfunction
 
+let g:NERDTreeWinSize=50
+let g:NERDTreeWinPos = "right"
 let g:NERDTreeShowHidden = 1
 let g:NerdTreeMinimalUI = 1
 let g:NERDTreeGitStatusWithFlags = 1
@@ -145,10 +162,21 @@ set termguicolors
 
 set background=dark
 
-let g:airline_theme = 'material'
-let g:material_theme_style = 'ocean'
-let g:material_terminal_italics = 1
-colorscheme material 
+" colorscheme palenight
+" let g:airline_theme = "palenight"
+" let g:palenight_terminal_italics=1
+
+let ayucolor="dark"
+colorscheme ayu
+
+" let g:airline_theme='onehalfdark'
+" colorscheme onehalfdark
+" set cursorline
+
+" let g:airline_theme = 'material'
+" let g:material_theme_style = 'ocean'
+" let g:material_terminal_italics = 1
+" colorscheme material 
 
 " colorscheme candid
 " let g:candid_color_store = {
