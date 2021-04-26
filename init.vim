@@ -44,25 +44,13 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Open files and global search
 nnoremap <c-p> :Files<cr>
 nnoremap <c-f> :Ag<cr>
 
-" Navigate between panels with ALT+{H,J,K,L}
-:tnoremap <A-h> <C-\><C-N><C-w>h
-:tnoremap <A-j> <C-\><C-N><C-w>j
-:tnoremap <A-k> <C-\><C-N><C-w>k
-:tnoremap <A-l> <C-\><C-N><C-w>l
-:inoremap <A-h> <C-\><C-N><C-w>h
-:inoremap <A-j> <C-\><C-N><C-w>j
-:inoremap <A-k> <C-\><C-N><C-w>k
-:inoremap <A-l> <C-\><C-N><C-w>l
+" Navigate between panels with ALT/CTRL+{H,J,K,L}
 :nnoremap <A-h> <C-w>h
 :nnoremap <A-j> <C-w>j
 :nnoremap <A-k> <C-w>k
@@ -85,6 +73,11 @@ nmap <leader>g :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
+" nerdtree
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 nmap <C-b> :call NERDTreeToggleAndRefresh()<CR>
@@ -98,12 +91,10 @@ endfunction
 
 let g:NERDTreeWinSize=50
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeShowHidden = 1
-let g:NerdTreeMinimalUI = 1
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
-
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDSpaceDelims = 2
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -116,16 +107,10 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" sync open file with NERDTree
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
 function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+  if &modifiable && g:NERDTree.IsOpen() && strlen(expand('%')) > 0 && !&diff
     NERDTreeFind
     wincmd p
   endif
@@ -156,10 +141,9 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:ale_completion_autoimport = 1
 let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'] }
 
+" themes
 syntax on
 set termguicolors
-
-
 set background=dark
 
 " colorscheme palenight
@@ -183,8 +167,6 @@ colorscheme ayu
     " \ "black": {"gui": "#0A0A16", "cterm256": "0"},
     " \}
 
-let g:NERDSpaceDelims = 2
-
 " Clear highlight search on escape
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
@@ -203,3 +185,4 @@ set encoding=UTF-8
 " open new split panes to right and below
 set splitright
 set splitbelow
+
