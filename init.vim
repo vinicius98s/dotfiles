@@ -1,46 +1,58 @@
 call plug#begin()
 
 " Themes
-Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'aonemd/quietlight.vim'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'Rigellute/shades-of-purple.vim'
+" Plug 'joshdick/onedark.vim' 
+" Plug 'flrnd/candid.vim'
+" Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'ayu-theme/ayu-vim'
-Plug 'aonemd/quietlight.vim'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-Plug 'Rigellute/shades-of-purple.vim'
-Plug 'joshdick/onedark.vim' 
-Plug 'flrnd/candid.vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
-" Elixir
+" Languages and LSP
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'jparise/vim-graphql'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'fatih/vim-go'
+Plug 'dense-analysis/ale'
 
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'dense-analysis/ale'
-Plug 'lambdalisue/gina.vim'
-Plug 'thinca/vim-ref'
-Plug 'tpope/vim-fugitive'
+" Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'jparise/vim-graphql'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'fatih/vim-go'
-Plug 'preservim/nerdcommenter'
+
+" Git
+Plug 'lambdalisue/gina.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Toggle commenter
+Plug 'preservim/nerdcommenter'
+
+" NERDTree
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+
+" Find files
 Plug 'ctrlpvim/ctrlp.vim' 
-Plug 'sheerun/vim-polyglot'
-Plug 'jiangmiao/auto-pairs'
+
+" Move lines
 Plug 'matze/vim-move'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+
+" Navigation
 Plug 'christoomey/vim-tmux-navigator'
+
+" Appearence
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -122,18 +134,6 @@ autocmd BufEnter * call SyncTree()
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-emmet'
-  \ ]
-
 let g:move_key_modifier = 'C'
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -141,17 +141,19 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:ale_completion_autoimport = 1
 let g:ale_fixers = { 'elixir': ['mix_format'], 'javascript': ['prettier', 'eslint'] }
 
-" themes
+let g:Hexokinase_highlighters = ['foregroundfull']
+
+" Themes
 syntax on
 set termguicolors
 set background=dark
 
+let ayucolor="dark"
+colorscheme ayu
+
 " colorscheme palenight
 " let g:airline_theme = "palenight"
 " let g:palenight_terminal_italics=1
-
-let ayucolor="dark"
-colorscheme ayu
 
 " let g:airline_theme='onehalfdark'
 " colorscheme onehalfdark
@@ -170,6 +172,10 @@ colorscheme ayu
 " Clear highlight search on escape
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
+
+" Bind escape
+inoremap jj <esc>
+vnoremap <leader>j <esc>
 
 set relativenumber
 set hidden
