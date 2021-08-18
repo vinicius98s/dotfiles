@@ -1,0 +1,9 @@
+{
+  "elixirLS.dialyzerEnabled": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "elixir",
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ]
+}
