@@ -20,6 +20,7 @@ alias codezsh="code ~/.zshrc"
 
 fpath=(${ASDF_DIR}/completions $fpath)
 . $HOME/.asdf/asdf.sh
+[ -f ~/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
 
 ### Added by Zinit's installer
 source "$HOME/.zinit/bin/zinit.zsh"
