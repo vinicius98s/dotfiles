@@ -7,7 +7,7 @@
 **Requirements**
 - [Neovim 0.5+](https://github.com/neovim/neovim)
 - [Vim plug](https://github.com/junegunn/vim-plug)
-- [The silver search](https://github.com/ggreer/the_silver_searcher)
+- [fd](https://github.com/sharkdp/fd)
 
 To install plugins: `:PlugInstall`
 
