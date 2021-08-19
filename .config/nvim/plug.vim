@@ -11,10 +11,11 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'glepnir/lspsaga.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'elixir-editors/vim-elixir'
 
 " Git
 Plug 'nvim-lua/plenary.nvim'
@@ -30,7 +31,9 @@ Plug 'hoob3rt/lualine.nvim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'ibhagwan/fzf-lua'
+Plug 'vijaymarupudi/nvim-fzf'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Buffers, files and navigation
 Plug 'kyazdani42/nvim-tree.lua'

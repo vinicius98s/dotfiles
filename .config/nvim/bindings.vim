@@ -33,21 +33,32 @@ nmap <C-a> gg<S-v>G
 " Delete without yank
 nnoremap <C-d> "_d
 
-" Show doc
-nnoremap <silent>K :Lspsaga hover_doc<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" LSP
-nnoremap <silent> gD :Lspsaga preview_definition<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Go to definition
 nmap <silent> gd <Plug>(coc-definition)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " Clear highlight search on escape
 nnoremap <esc> :nohlsearch<return><esc>
 
-" Open files and fuzzy finder
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-nnoremap <C-p> :Files<cr>
-nnoremap <C-f> :Ag<cr>
-nnoremap <C-o> :Buffers<cr>
+" Fzf
+nnoremap <C-p> :FzfLua files<cr>
+nnoremap <C-f> :FzfLua live_grep<cr>
+nnoremap <C-o> :FzfLua buffers<cr>
 
 " Buffer navigation
 noremap <leader>w :bp<cr>

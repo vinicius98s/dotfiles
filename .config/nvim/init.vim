@@ -3,10 +3,8 @@ runtime ./bindings.vim
 runtime ./nvim-tree.vim
 runtime ./themes.vim
 
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 set completeopt+=preview
 set hidden
