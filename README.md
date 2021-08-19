@@ -1,5 +1,16 @@
 # Dotfiles
 
+## Installation
+
+**Requirements**
+- [rcm](https://github.com/thoughtbot/rcm)
+
+```
+cd ~
+git clone https://github.com/vinicius98s/dotfiles.git .dotfiles
+sh install.sh
+```
+
 ## Neovim configurations
 
 `<leader> = Space`
@@ -36,9 +47,7 @@ Config is based on [Oh my tmux!](https://github.com/gpakosz/.tmux), so most of s
 **Themes**
 - [Spaceship](https://github.com/spaceship-prompt/spaceship-prompt)
 `ZSH_THEME="spaceship"`
-![Spaceship theme](.github/Screenshot%20from%202021-08-18%2017-30-15.png?raw=true)
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 `ZSH_THEME="powerlevel10k/powerlevel10k"`
-![p10k theme](.github/Screenshot%20from%202021-08-18%2017-30-52.png?raw=true)
 

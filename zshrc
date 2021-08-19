@@ -46,3 +46,4 @@ git config --global --add alias.yolo '!git commit -m "$(curl -s whatthecommit.co
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export ERL_AFLAGS="-kernel shell_history enabled"
+
