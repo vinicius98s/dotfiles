@@ -8,6 +8,7 @@
 - [Neovim 0.5+](https://github.com/neovim/neovim)
 - [Vim plug](https://github.com/junegunn/vim-plug)
 - [fd](https://github.com/sharkdp/fd)
+- [bat](https://github.com/sharkdp/bat)
 
 To install plugins: `:PlugInstall`
 
