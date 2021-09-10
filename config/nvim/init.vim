@@ -6,6 +6,8 @@ runtime ./themes.vim
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+let g:dashboard_default_executive ='fzf'
+
 set completeopt+=preview
 set hidden
 set number
