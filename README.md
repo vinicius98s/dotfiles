@@ -8,6 +8,7 @@
 ```
 cd ~
 git clone https://github.com/vinicius98s/dotfiles.git .dotfiles
+cd .dotfiles
 sh install.sh
 ```
 
