@@ -86,3 +86,5 @@ noremap <leader>gpsf :Git push --force<CR>
 noremap <leader>gd :Gvdiff<CR>
 noremap <leader>gr :GRemove<CR>
 
+" NvimTree
+nnoremap <C-b> :NvimTreeToggle<CR>

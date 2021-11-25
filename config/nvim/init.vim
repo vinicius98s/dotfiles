@@ -1,6 +1,5 @@
 runtime ./plug.vim
 runtime ./bindings.vim
-runtime ./nvim-tree.vim
 runtime ./themes.vim
 
 " Highlight the symbol and its references when holding the cursor.

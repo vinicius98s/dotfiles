@@ -19,7 +19,6 @@ source $ZSH/oh-my-zsh.sh
 alias codezsh="code ~/.zshrc"
 
 fpath=(${ASDF_DIR}/completions $fpath)
-. $HOME/.asdf/asdf.sh
 [ -f ~/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
 
 ### Added by Zinit's installer
@@ -30,7 +29,7 @@ autoload -Uz _zinit
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -46,4 +45,8 @@ git config --global --add alias.yolo '!git commit -m "$(curl -s whatthecommit.co
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

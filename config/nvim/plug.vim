@@ -43,7 +43,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Appearance
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'glepnir/dashboard-nvim'
 
 " Comments
 Plug 'preservim/nerdcommenter'
