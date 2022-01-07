@@ -3,6 +3,7 @@
 ## Installation
 
 **Requirements**
+
 - [rcm](https://github.com/thoughtbot/rcm)
 
 ```
@@ -17,12 +18,12 @@ sh install.sh
 `<leader> = Space`
 
 **Requirements**
-- [Neovim 0.5+](https://github.com/neovim/neovim)
-- [Vim plug](https://github.com/junegunn/vim-plug)
-- [fd](https://github.com/sharkdp/fd)
-- [bat](https://github.com/sharkdp/bat)
 
-To install plugins: `:PlugInstall`
+- [Neovim 0.5+](https://github.com/neovim/neovim)
+- [packer.nvim](https://github.com/wbthomason/packer.nvim)
+- [rg](https://github.com/BurntSushi/ripgrep)
+
+To install plugins: `:PackerInstall`
 
 Some bindings:
 
@@ -38,17 +39,19 @@ Some bindings:
 Config is based on [Oh my tmux!](https://github.com/gpakosz/.tmux), so most of shortcuts can be found there.
 
 **Requirements**
+
 - [TPM](https://github.com/tmux-plugins/tpm)
 
 ### Zsh
 
 **Requirements**
+
 - [Oh my zsh](https://ohmyz.sh/)
 
 **Themes**
+
 - [Spaceship](https://github.com/spaceship-prompt/spaceship-prompt)
-`ZSH_THEME="spaceship"`
+  `ZSH_THEME="spaceship"`
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
-`ZSH_THEME="powerlevel10k/powerlevel10k"`
-
+  `ZSH_THEME="powerlevel10k/powerlevel10k"`
