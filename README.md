@@ -1,5 +1,9 @@
 # Dotfiles
 
+## Preview
+![Nvim](assets/Screenshot_20220107_174322.png?raw=true)
+![Files](assets/Screenshot_20220107_174415.png?raw=true)
+
 ## Installation
 
 **Requirements**
