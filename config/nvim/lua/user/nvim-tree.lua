@@ -77,7 +77,7 @@ nvim_tree.setup {
     }
   },
   view = {
-    width = 30,
+    width = 35,
     height = 30,
     hide_root_folder = false,
     side = "left",
@@ -93,7 +93,7 @@ nvim_tree.setup {
     number = false,
     relativenumber = false,
   },
-  quit_on_open = 0,
+  quit_on_open = 1,
   git_hl = 1,
   disable_window_picker = 0,
   root_folder_modifier = ":t",

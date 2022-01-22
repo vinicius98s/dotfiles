@@ -11,3 +11,10 @@ require "user.gitsigns"
 require "user.nvim-tree"
 require "user.bufferline"
 
+vim.opt.list = true
+
+require("indent_blankline").setup {
+  space_char_blankline = " ",
+  show_current_context = true,
+}
+
