@@ -1,17 +1,12 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="spaceship"
+ZSH_THEME="guezwhoz"
+
 plugins=(git kubectl)
 
 source $ZSH/oh-my-zsh.sh
@@ -48,11 +43,5 @@ git config --global alias.unstage 'reset HEAD --'
 # 'git yolo' for something magic
 git config --global --add alias.yolo '!git commit -m "$(curl -s whatthecommit.com/index.txt)"'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 export ERL_AFLAGS="-kernel shell_history enabled"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

@@ -60,7 +60,6 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
   -- Snippets
   use "L3MON4D3/LuaSnip"
@@ -88,6 +87,7 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+  use "tpope/vim-fugitive"
 
   -- Nvim Tree
   use 'kyazdani42/nvim-tree.lua'

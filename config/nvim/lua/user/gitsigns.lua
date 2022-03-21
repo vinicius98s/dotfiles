@@ -14,6 +14,8 @@ gitsigns.setup {
   keymaps = {
     ['n <leader>p'] = '<cmd>Gitsigns preview_hunk<CR>',
     ['n <leader>pq'] = '<cmd>Gitsigns reset_hunk<CR>',
+    ['n ]c'] = '<cmd>Gitsigns next_hunk<CR>',
+    ['n [c'] = '<cmd>Gitsigns prev_hunk<CR>',
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
