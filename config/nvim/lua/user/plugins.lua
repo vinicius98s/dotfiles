@@ -48,6 +48,7 @@ return packer.startup(function(use)
   -- Themes
   -- use "ayu-theme/ayu-vim"
   use "folke/tokyonight.nvim"
+  use "arcticicestudio/nord-vim"
 
   -- Completion
   use "hrsh7th/cmp-nvim-lsp"
@@ -97,7 +98,7 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
-  use "lukas-reineke/indent-blankline.nvim"
+  -- use "lukas-reineke/indent-blankline.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -1,8 +1,0 @@
-{
-  "coc.preferences.formatOnSaveFiletypes": [
-    "elixir",
-    "javascript",
-    "typescript",
-    "typescriptreact"
-  ]
-}
