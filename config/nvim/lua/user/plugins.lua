@@ -46,7 +46,7 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
   -- Themes
-  -- use "ayu-theme/ayu-vim"
+  use "ayu-theme/ayu-vim"
   use "folke/tokyonight.nvim"
   use "arcticicestudio/nord-vim"
 
