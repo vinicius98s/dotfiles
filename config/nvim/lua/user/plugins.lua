@@ -46,6 +46,7 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
   -- Themes
+  use "marko-cerovac/material.nvim"
   use "ayu-theme/ayu-vim"
   use "folke/tokyonight.nvim"
   use "arcticicestudio/nord-vim"
@@ -83,7 +84,7 @@ return packer.startup(function(use)
   }
 
   -- Comments
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use "JoosepAlviste/nvim-ts-context-commentstring"
   use "numToStr/Comment.nvim"
 
   -- Git
@@ -98,17 +99,21 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
+  -- Auto close html tags
+  use "windwp/nvim-ts-autotag"
+
   -- Crates.io
   use {
-    'saecki/crates.nvim',
-    tag = 'v0.2.1',
-    requires = { 'nvim-lua/plenary.nvim' },
+    "saecki/crates.nvim",
+    tag = "v0.2.1",
+    requires = { "nvim-lua/plenary.nvim" },
     config = function()
-        require('crates').setup()
+        require("crates").setup()
     end,
   }
 
-  -- use "lukas-reineke/indent-blankline.nvim"
+  -- Ident blankline
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

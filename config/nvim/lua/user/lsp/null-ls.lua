@@ -11,13 +11,13 @@ null_ls.setup {
   debug = false,
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
   end,
   sources = {
     formatting.prettier,
-    formatting.black.with({ extra_args = { "--fast" } }),
-    formatting.stylua,
+    diagnostics.eslint,
+    code_actions.eslint,
     formatting.rustfmt.with({
       extra_args = function(params)
           local Path = require("plenary.path")
@@ -35,8 +35,5 @@ null_ls.setup {
           return { "--edition=2021" }
       end,
     }),
-    diagnostics.flake8,
-    diagnostics.eslint,
-    code_actions.eslint
   },
 }

@@ -11,9 +11,13 @@ vim.cmd [[
 -- local colorscheme = "ayu"
 -- vim.g.ayucolor = "dark"
 
+-- Material
+local colorscheme = "material"
+vim.g.material_style = "deep ocean"
+
 -- Tokyonight
-local colorscheme = "tokyonight"
-vim.g.tokyonight_style = "night"
+-- local colorscheme = "tokyonight"
+-- vim.g.tokyonight_style = "night"
 
 -- Nord
 -- local colorscheme = "nord"
