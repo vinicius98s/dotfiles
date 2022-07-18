@@ -1,7 +1,7 @@
 # Dotfiles
 
 ## Preview
-![Nvim](assets/nvim.png?raw=true)
+![Nvim](assets/image.png?raw=true)
 
 ## Installation
 
