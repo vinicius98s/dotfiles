@@ -47,9 +47,9 @@ return packer.startup(function(use)
 
   -- Themes
   use "marko-cerovac/material.nvim"
-  use "ayu-theme/ayu-vim"
-  use "folke/tokyonight.nvim"
-  use "arcticicestudio/nord-vim"
+  -- use "ayu-theme/ayu-vim"
+  -- use "folke/tokyonight.nvim"
+  -- use "arcticicestudio/nord-vim"
 
   -- Completion
   use "hrsh7th/cmp-nvim-lsp"
@@ -62,6 +62,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use { "glepnir/lspsaga.nvim", { branch = "main" } }
 
   -- Snippets
   use "L3MON4D3/LuaSnip"
@@ -113,7 +114,7 @@ return packer.startup(function(use)
   }
 
   -- Ident blankline
-  use "lukas-reineke/indent-blankline.nvim"
+  -- use "lukas-reineke/indent-blankline.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -10,5 +10,5 @@ require "user.comments"
 require "user.gitsigns"
 require "user.nvim-tree"
 require "user.bufferline"
-require "user.indent_blankline"
+-- require "user.indent_blankline"
 
