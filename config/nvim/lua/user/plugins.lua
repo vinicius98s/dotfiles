@@ -48,7 +48,7 @@ return packer.startup(function(use)
   -- Themes
   use "marko-cerovac/material.nvim"
   -- use "ayu-theme/ayu-vim"
-  -- use "folke/tokyonight.nvim"
+  use "folke/tokyonight.nvim"
   -- use "arcticicestudio/nord-vim"
 
   -- Completion
@@ -76,7 +76,6 @@ return packer.startup(function(use)
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter
   use {
@@ -93,8 +92,8 @@ return packer.startup(function(use)
   use "tpope/vim-fugitive"
 
   -- Nvim Tree
-  use 'kyazdani42/nvim-tree.lua'
-  use 'kyazdani42/nvim-web-devicons'
+  use "kyazdani42/nvim-tree.lua"
+  use "kyazdani42/nvim-web-devicons"
 
   -- Bufferline
   use "akinsho/bufferline.nvim"
@@ -102,16 +101,6 @@ return packer.startup(function(use)
 
   -- Auto close html tags
   use "windwp/nvim-ts-autotag"
-
-  -- Crates.io
-  use {
-    "saecki/crates.nvim",
-    tag = "v0.2.1",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function()
-        require("crates").setup()
-    end,
-  }
 
   -- Ident blankline
   -- use "lukas-reineke/indent-blankline.nvim"

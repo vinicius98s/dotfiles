@@ -76,11 +76,6 @@ local function lsp_keymaps(bufnr)
       vim.cmd('h '..vim.fn.expand('<cword>'))
     elseif vim.tbl_contains({ 'man' }, filetype) then
       vim.cmd('Man '..vim.fn.expand('<cword>'))
-    elseif vim.fn.expand('%:t') == 'Cargo.toml' then
-      local status_ok, crates = pcall(require, "crates")
-      if status_ok then
-        crates.show_popup()
-      end
     else
       local status_ok, saga_hover = pcall(require, "lspsaga.hover")
       if status_ok then

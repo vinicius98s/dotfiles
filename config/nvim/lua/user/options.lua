@@ -25,14 +25,15 @@ local options = {
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   tabstop = 2,                             -- insert 2 spaces for a tab
   cursorline = true,                       -- highlight the current line
-  number = false,                          -- set numbered lines
+  number = true,                           -- set numbered lines
   relativenumber = false,                  -- set relative numbered lines
-  numberwidth = 4,                         -- set number column width to 2 {default 4}
+  numberwidth = 1,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  guifont = "monospace:h18",               -- the font used in graphical neovim applications
+  guicursor = "n-v-c-sm:block,i:block-blinkon1,ci-ve:ver25,r-cr-o:hor20",
 }
 
 vim.opt.shortmess:append "c"
