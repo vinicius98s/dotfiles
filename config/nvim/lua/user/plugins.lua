@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use "marko-cerovac/material.nvim"
   -- use "ayu-theme/ayu-vim"
   use "folke/tokyonight.nvim"
+  use "B4mbus/oxocarbon-lua.nvim"
   -- use "arcticicestudio/nord-vim"
 
   -- Completion
@@ -62,7 +63,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use { "glepnir/lspsaga.nvim", { branch = "main" } }
+  use "glepnir/lspsaga.nvim" 
 
   -- Snippets
   use "L3MON4D3/LuaSnip"
@@ -103,7 +104,24 @@ return packer.startup(function(use)
   use "windwp/nvim-ts-autotag"
 
   -- Ident blankline
-  -- use "lukas-reineke/indent-blankline.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
+
+  -- Notify
+  use "rcarriga/nvim-notify"
+
+  -- Startup
+  use "goolord/alpha-nvim"
+
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest",
+      "rouge8/neotest-rust"
+    }
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

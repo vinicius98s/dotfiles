@@ -15,9 +15,12 @@ vim.cmd [[
 -- vim.g.material_style = "deep ocean"
 -- local colorscheme = "material"
 
+-- Oxocarbon
+local colorscheme = "oxocarbon-lua"
+
 -- Tokyonight
-local colorscheme = "tokyonight"
-vim.g.tokyonight_style = "night"
+-- local colorscheme = "tokyonight"
+-- vim.g.tokyonight_style = "night"
 
 -- Nord
 -- local colorscheme = "nord"
