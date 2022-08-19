@@ -4,10 +4,7 @@ if not status_ok then
 end
 
 saga.init_lsp_saga({
-  diagnostic_header = { " ", " ", " ", "ﴞ " },
-  border_style = "rounded",
-  symbol_in_winbar = {
-    in_custom = true
-  }
+	diagnostic_header = { " ", " ", " ", "ﴞ " },
+	code_action_icon = "",
+	border_style = "rounded",
 })
-
