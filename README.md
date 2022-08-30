@@ -17,6 +17,7 @@
 - [rg](https://github.com/BurntSushi/ripgrep#installation)
 - [tmux](https://github.com/tmux/tmux/wiki/Installing)
 - [TPM](https://github.com/tmux-plugins/tpm#installation)
+- [kitty](https://sw.kovidgoyal.net/kitty/)
 - `build-essential` (Ubuntu)
 
   ```sh
