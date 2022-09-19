@@ -30,5 +30,9 @@ lspconfig.tsserver.setup({})
 local jsonls_config = require("user.lsp.settings.jsonls")
 lspconfig.jsonls.setup(jsonls_config)
 
+local rt_ok, rt = pcall(require, "rust-tools")
+if not rt_ok then
+	return
+end
 local rust_analyzer_config = require("user.lsp.settings.rust-analyzer")
-lspconfig.rust_analyzer.setup(rust_analyzer_config)
+rt.setup(rust_analyzer_config)

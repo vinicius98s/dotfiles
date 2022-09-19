@@ -1,4 +1,4 @@
-require("impatient")
+pcall(require, "impatient")
 
 require("user.options")
 require("user.keymaps")
@@ -17,3 +17,4 @@ require("user.bufferline")
 require("user.indent_blankline")
 require("user.notify")
 require("user.alpha")
+require("user.crates")

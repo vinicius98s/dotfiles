@@ -46,10 +46,11 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 
 	-- Themes
-	use("marko-cerovac/material.nvim")
-	-- use "ayu-theme/ayu-vim"
-	use("folke/tokyonight.nvim")
 	use("B4mbus/oxocarbon-lua.nvim")
+	-- use("EdenEast/nightfox.nvim")
+	-- use("marko-cerovac/material.nvim")
+	-- use("folke/tokyonight.nvim")
+	-- use "ayu-theme/ayu-vim"
 	-- use "arcticicestudio/nord-vim"
 
 	-- Completion
@@ -58,6 +59,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
+	use("saecki/crates.nvim")
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
@@ -65,6 +67,7 @@ return packer.startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("glepnir/lspsaga.nvim")
+	use("simrat39/rust-tools.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")
@@ -116,6 +119,9 @@ return packer.startup(function(use)
 
 	-- Blazingly fast
 	use("lewis6991/impatient.nvim")
+
+	-- Harpoon
+	use("ThePrimeagen/harpoon")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

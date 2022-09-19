@@ -15,6 +15,9 @@ vim.cmd([[
 -- vim.g.material_style = "deep ocean"
 -- local colorscheme = "material"
 
+-- nightfox
+-- local colorscheme = "nightfox"
+
 -- Oxocarbon
 local colorscheme = "oxocarbon-lua"
 
