@@ -53,7 +53,10 @@ keymap("n", "ss", ":vsplit<CR>", opts)
 keymap("n", "<C-a>", "gg<S-v>G", opts)
 
 -- Delete without yank
-keymap("n", "<C-d>", '"_d', opts)
+keymap("n", "<leader>d", '"_d', opts)
+
+-- Ctrl C = ESC
+keymap("n", "<C-c>", "<ESC>", opts)
 
 -- Clear highlight search on escape
 keymap("n", "<ESC>", ":nohlsearch<Return><ESC>", opts)
