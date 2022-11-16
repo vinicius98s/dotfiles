@@ -35,10 +35,14 @@ zinit light-mode for \
 git config --global user.email "vinicius.2010.s@gmail.com"
 git config --global user.name "Vinicius Sales"
 
+if ! [ -x "$(command -V batcat)" ]; then
+  alias cat='batcat --paging=never'
+fi 
+
 # Git aliases
 git config --global alias.unstage 'reset HEAD --'
 # 'git yolo' for something magic
-git config --global --add alias.yolo '!git commit -m "$(curl -s whatthecommit.com/index.txt)"'
+git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
