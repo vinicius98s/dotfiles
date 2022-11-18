@@ -1,5 +1,5 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 # ZSH_THEME="spaceship"
 ZSH_THEME="guezwhoz"
@@ -43,6 +43,3 @@ fi
 git config --global alias.unstage 'reset HEAD --'
 # 'git yolo' for something magic
 git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
-
-export ERL_AFLAGS="-kernel shell_history enabled"
-

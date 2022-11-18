@@ -11,7 +11,7 @@ end
 mason.setup()
 
 mason_lspconfig.setup({
-	ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "eslint" },
+	ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "eslint", "prettier" },
 	automatic_installation = true,
 })
 
