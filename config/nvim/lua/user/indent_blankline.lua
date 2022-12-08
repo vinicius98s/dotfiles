@@ -3,25 +3,23 @@ if not status_ok then
 	return
 end
 
-vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-vim.g.indent_blankline_filetype_exclude = {
-	"help",
-	"startify",
-	"dashboard",
-	"packer",
-	"neogitstatus",
-	"NvimTree",
-	"Trouble",
-	"text",
-}
-vim.g.indentLine_enabled = 1
-vim.g.indent_blankline_char = "▏"
-
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = true
-vim.g.indent_blankline_use_treesitter = false
-vim.g.indent_blankline_show_current_context = true
-
 indent_blankline.setup({
+  char = " ",
+  context_char = "▏",
 	show_current_context = true,
+  use_treesitter = true,
+  use_treesitter_scope = false,
+  show_first_indent_level = true,
+  show_trailing_blankline_indent = false,
+  buftype_exclude = { "terminal", "nofile" },
+  filetype_exclude = {
+    "help",
+    "startify",
+    "dashboard",
+    "packer",
+    "neogitstatus",
+    "NvimTree",
+    "Trouble",
+    "text",
+  }
 })

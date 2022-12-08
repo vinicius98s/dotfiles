@@ -47,11 +47,11 @@ return packer.startup(function(use)
 
 	-- Themes
 	use("B4mbus/oxocarbon-lua.nvim")
-	-- use("EdenEast/nightfox.nvim")
-	-- use("marko-cerovac/material.nvim")
-	-- use("folke/tokyonight.nvim")
-	-- use "ayu-theme/ayu-vim"
-	-- use "arcticicestudio/nord-vim"
+	use("EdenEast/nightfox.nvim")
+	use("marko-cerovac/material.nvim")
+	use("folke/tokyonight.nvim")
+	use("ayu-theme/ayu-vim")
+	use("arcticicestudio/nord-vim")
 
 	-- Completion
 	use("hrsh7th/cmp-nvim-lsp")
@@ -68,6 +68,28 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("glepnir/lspsaga.nvim")
 	use("simrat39/rust-tools.nvim")
+
+  use({
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
+
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
+    }
+  })
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")

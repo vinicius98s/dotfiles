@@ -19,11 +19,10 @@ vim.cmd([[
 -- local colorscheme = "nightfox"
 
 -- Oxocarbon
-local colorscheme = "oxocarbon-lua"
+-- local colorscheme = "oxocarbon-lua"
 
 -- Tokyonight
--- local colorscheme = "tokyonight"
--- vim.g.tokyonight_style = "night"
+local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
 
 -- Nord
 -- local colorscheme = "nord"
