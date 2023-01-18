@@ -43,3 +43,8 @@ fi
 git config --global alias.unstage 'reset HEAD --'
 # 'git yolo' for something magic
 git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
+
+# pnpm
+export PNPM_HOME="${HOME}/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

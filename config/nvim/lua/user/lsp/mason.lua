@@ -26,6 +26,7 @@ util.default_config = vim.tbl_extend("force", util.default_config, {
 
 lspconfig.sumneko_lua.setup({})
 lspconfig.tsserver.setup({})
+lspconfig.tailwindcss.setup({})
 
 local jsonls_config = require("user.lsp.settings.jsonls")
 lspconfig.jsonls.setup(jsonls_config)
