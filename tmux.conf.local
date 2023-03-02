@@ -8,8 +8,5 @@ set -g @plugin "arcticicestudio/nord-tmux"
 # Rename windows
 set -g @plugin 'ofirgall/tmux-window-name'
 
-# Continuous sessions
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-restore 'on'
 

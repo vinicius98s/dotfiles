@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
 export ERL_AFLAGS="-kernel shell_history enabled"
 
@@ -48,3 +50,6 @@ git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthec
 export PNPM_HOME="${HOME}/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

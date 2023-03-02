@@ -11,7 +11,7 @@ end
 mason.setup()
 
 mason_lspconfig.setup({
-	ensure_installed = { "sumneko_lua", "rust_analyzer", "tsserver", "eslint" },
+	ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "eslint" },
 	automatic_installation = true,
 })
 
@@ -24,7 +24,7 @@ util.default_config = vim.tbl_extend("force", util.default_config, {
 	on_attach = handlers.on_attach,
 })
 
-lspconfig.sumneko_lua.setup({})
+lspconfig.lua_ls.setup({})
 lspconfig.tsserver.setup({})
 lspconfig.tailwindcss.setup({})
 

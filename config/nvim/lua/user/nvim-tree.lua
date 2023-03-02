@@ -13,14 +13,11 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 -- Remove status line on NvimTree
-vim.cmd([[
-au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree_1" | set laststatus=0 | else | set laststatus=3 | endif
-]])
+vim.cmd([[au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree_1" | set laststatus=0 | else | set laststatus=3 | endif]])
 
 nvim_tree.setup({
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
   renderer = {
     icons = {
       glyphs = {
@@ -45,11 +42,6 @@ nvim_tree.setup({
       },
     },
   },
-  ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
-  },
   open_on_tab = false,
   hijack_cursor = false,
   update_cwd = true,
@@ -73,6 +65,7 @@ nvim_tree.setup({
     timeout = 500,
   },
   filters = {
+    dotfiles = false,
     custom = {
       "node_modules",
       ".cache",
@@ -80,7 +73,7 @@ nvim_tree.setup({
     },
   },
   view = {
-    width = 35,
+    width = 40,
     hide_root_folder = false,
     side = "left",
     mappings = {
