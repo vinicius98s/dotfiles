@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup({
-	ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx" },
+	ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "markdown", "markdown_inline" },
 	autotag = {
 		enable = true,
 	},
