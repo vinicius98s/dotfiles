@@ -34,6 +34,7 @@ zinit light-mode for \
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 if [[ ! -f ~/.gitconfig ]]; then
+  git config --global core.editor "vi"
   git config --global user.email "vinicius.2010.s@gmail.com"
   git config --global user.name "Vinicius Sales"
 
