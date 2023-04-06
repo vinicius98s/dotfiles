@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -44,7 +44,7 @@ if [[ ! -f ~/.gitconfig ]]; then
   git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 fi
 
-if ! [ -x "$(command -V batcat)" ]; then
+if [ -x "$(command -V batcat)" ]; then
   alias cat="batcat --paging=never"
 fi 
 
