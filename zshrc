@@ -7,7 +7,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # ZSH_THEME="spaceship"
 ZSH_THEME="guezwhoz"
 
-plugins=(git kubectl)
+plugins=(git kubectl asdf)
 
 source $ZSH/oh-my-zsh.sh
 
