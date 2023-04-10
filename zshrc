@@ -44,7 +44,15 @@ if [[ ! -f ~/.gitconfig ]]; then
   git config --global --add alias.yolo '!git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 fi
 
-if [ -x "$(command -V batcat)" ]; then
+is_installed() {
+    if which "$1" >/dev/null 2>&1; then
+        return 0 # true
+    else
+        return 1 # false
+    fi
+}
+
+if is_installed "batcat"; then
   alias cat="batcat --paging=never"
 fi 
 
