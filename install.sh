@@ -166,8 +166,12 @@ install_jetbrains_mono() {
 }
 
 install_build_essential() {
-  echo "Installing build-essential..."
-  sudo apt install build-essential -y
+  if ! apt list | grep "build-essential/" > /dev/null; then
+    echo "Installing build-essential..."
+    sudo apt install build-essential -y
+  else
+    echo "build-essential is already installed"
+  fi
 }
 
 install_asdf() {
@@ -182,12 +186,16 @@ install_asdf() {
 }
 
 install_node() {
-  if is_installed "asdf" && ! is_installed "node"; then
-    echo "Installing Node.js with asdf..."
-    sudo apt-get install dirmngr gpg curl gawk -y
-    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-    asdf install nodejs latest
-    asdf global nodejs latest
+  if is_installed "asdf"; then
+    if ! is_installed "node"; then
+      echo "Installing Node.js with asdf..."
+      sudo apt-get install dirmngr gpg curl gawk -y
+      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+      asdf install nodejs latest
+      asdf global nodejs latest
+    else
+      echo "Node.js is already installed"
+    fi
   else
     echo "asdf cli is not available, skipping Node.js installation"
     echo "If you already downloaded asdf, please run 'source $HOME/.zshrc' to make it's cli available"
@@ -199,7 +207,7 @@ echo "Installing required programs..."
 install_rcm
 
 echo "Copying dotfiles..."
-rcup -x README.md -x ./assets -x install.sh -f -v
+rcup -x README.md -x ./assets -x install.sh -f
 
 install_build_essential
 
