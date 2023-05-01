@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 saga.setup({
-  lightbulb = {
-    enable = false,
-  },
+	lightbulb = {
+		enable = false,
+	},
 })

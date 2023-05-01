@@ -9,7 +9,7 @@ configs.setup({
 		enable = true,
 	},
 	sync_install = false,
-  auto_install = true,
+	auto_install = true,
 	ignore_install = { "" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
