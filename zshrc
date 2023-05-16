@@ -31,9 +31,9 @@ zinit light-mode for \
   zsh-users/zsh-completions
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ ! -f ~/.p10k.zsh ] || source ~/.p10k.zsh
 
-if [[ ! -f ~/.gitconfig ]]; then
+if [ ! -f ~/.gitconfig ]; then
   git config --global core.editor "vi"
   git config --global user.email "vinicius.2010.s@gmail.com"
   git config --global user.name "Vinicius Sales"
@@ -62,4 +62,4 @@ export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+[ -f "$HOME/.fig/shell/zshrc.post.zsh" ] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
