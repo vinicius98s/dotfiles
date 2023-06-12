@@ -57,8 +57,11 @@ if is_installed "batcat"; then
 fi 
 
 # pnpm
-export PNPM_HOME="${HOME}/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+export PNPM_HOME="/home/vinicius/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
 
 # Fig post block. Keep at the bottom of this file.

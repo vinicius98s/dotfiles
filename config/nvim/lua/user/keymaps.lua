@@ -38,7 +38,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<leader>e", ":bn<CR>", opts)
 keymap("n", "<leader>w", ":bp<CR>", opts)
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
-keymap("n", "<leader>x", ":%bd<CR>", opts)
+keymap("n", "<leader>x", ":%bd<CR>:NvimTreeOpen<CR>", opts)
 
 -- These will make it so that going to the next one in a
 -- search will center on the line it's found in.

@@ -64,7 +64,7 @@ nvim_tree.setup({
 		custom = {
 			"node_modules",
 			".cache",
-			".git",
+			"^.git$",
 		},
 	},
 	view = {
