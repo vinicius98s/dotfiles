@@ -46,7 +46,7 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 
 	-- Themes
-	use("B4mbus/oxocarbon-lua.nvim")
+	use("nyoom-engineering/oxocarbon.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("marko-cerovac/material.nvim")
 	use("folke/tokyonight.nvim")

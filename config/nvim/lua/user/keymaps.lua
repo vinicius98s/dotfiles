@@ -1,5 +1,4 @@
 local opts = { noremap = true, silent = true }
-
 local term_opts = { silent = true }
 
 -- Shorten function name
@@ -19,6 +18,14 @@ vim.g.maplocalleader = " "
 --   command_mode = "c",
 
 -- Normal --
+-- Git
+keymap("n", "<leader>p", "<cmd>Gitsigns preview_hunk<CR>", opts)
+keymap("n", "<leader>pq", "<cmd>Gitsigns reset_hunk<CR>", opts)
+keymap("n", "]c", "<cmd>Gitsigns next_hunk<CR>", opts)
+keymap("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", opts)
+keymap("n", "<leader>ps", "<cmd>Gitsigns stage_hunk<CR>", opts)
+keymap("v", "<leader>ps", "<cmd>Gitsigns stage_hunk<CR>", opts)
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -110,3 +117,5 @@ vim.cmd("cnoreabbrev W w")
 vim.cmd("cnoreabbrev Q q")
 vim.cmd("cnoreabbrev Qall qall")
 vim.cmd("cnoreabbrev Qa qa")
+
+-- Git --
