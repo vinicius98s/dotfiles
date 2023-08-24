@@ -32,8 +32,10 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- Nvimtree
-keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
+-- Tree
+-- keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
+-- keymap("n", "<C-b>", ":Neotree toggle reveal_file=" .. ":lua echo @%" .. "<CR>", opts)
+keymap("n", "<C-b>", ":lua NeoTreeToggleReveal()<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -45,7 +47,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<leader>e", ":bn<CR>", opts)
 keymap("n", "<leader>w", ":bp<CR>", opts)
 keymap("n", "<leader>q", ":Bdelete<CR>", opts)
-keymap("n", "<leader>x", ":%bd<CR>:NvimTreeOpen<CR>", opts)
+keymap("n", "<leader>x", ":%bd<CR>", opts)
 
 -- These will make it so that going to the next one in a
 -- search will center on the line it's found in.

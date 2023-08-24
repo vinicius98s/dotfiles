@@ -71,12 +71,12 @@ install_zsh() {
 	fi
 }
 
-update_shell() {
-	if [ "$SHELL" = "/usr/bin/zsh" ]; then
-		echo "Default shell is zsh"
+install_ohmyzsh() {
+	if [ ! -d $HOME/.oh-my-zsh ]; then
+		echo "Installing Oh my zsh..."
+		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	else
-		echo "Setting default shell to zsh"
-		chsh -s $(which zsh)
+		echo "Oh my zsh is already installed"
 	fi
 }
 
@@ -145,7 +145,7 @@ install_jetbrains_mono() {
 	    echo "Found fonts directory at $fonts_dir"
 	fi
 
-	if ! ls $fonts_dir | grep "JetBrains Mono" > /dev/null; then
+	if ! ls $fonts_dir | grep "JetBrains" > /dev/null; then
 		font_version=$(get_latest_release_version "ryanoasis/nerd-fonts")
 		download_font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/$font_version/JetBrainsMono.zip"
 		wget -O JetBrainsMono.zip $download_font_url
@@ -155,7 +155,7 @@ install_jetbrains_mono() {
 			sudo apt install unzip -y
 		fi
 		
-		unzip JetBrainsMono.zip "*Nerd Font Complete Mono.ttf" -d $fonts_dir
+		unzip JetBrainsMono.zip "*.ttf" -d $fonts_dir
 		rm JetBrainsMono.zip
 
 		echo "Running fc-cache..."
@@ -217,7 +217,7 @@ install_packer
 
 install_zsh
 
-update_shell
+install_ohmyzsh
 
 install_zinit
 
