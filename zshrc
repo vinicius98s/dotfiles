@@ -1,4 +1,6 @@
 # Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+# Fig pre block. Keep at the top of this file.
 [ -f "$HOME/.fig/shell/zshrc.pre.zsh" ] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
@@ -64,5 +66,12 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# bun completions
+[ -s "/home/vinicius/.bun/_bun" ] && source "/home/vinicius/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Fig post block. Keep at the bottom of this file.
-[ -f "$HOME/.fig/shell/zshrc.post.zsh" ] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

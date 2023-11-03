@@ -52,6 +52,7 @@ return packer.startup(function(use)
 	use("folke/tokyonight.nvim")
 	use("ayu-theme/ayu-vim")
 	use("arcticicestudio/nord-vim")
+	use({ "srcery-colors/srcery-vim", as = "srcery" })
 
 	-- Completion
 	use("hrsh7th/cmp-nvim-lsp")
@@ -157,6 +158,14 @@ return packer.startup(function(use)
 
 	-- Copilot
 	use("github/copilot.vim")
+
+	-- Markdown preview
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

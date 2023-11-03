@@ -12,20 +12,23 @@ vim.cmd([[
 -- vim.g.ayucolor = "dark"
 
 -- Material
--- vim.g.material_style = "deep ocean"
--- local colorscheme = "material"
+vim.g.material_style = "deep ocean"
+local colorscheme = "material"
 
 -- nightfox
 -- local colorscheme = "nightfox"
 
 -- Oxocarbon
-local colorscheme = "oxocarbon"
+-- local colorscheme = "oxocarbon"
 
 -- Tokyonight
 -- local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
 
 -- Nord
 -- local colorscheme = "nord"
+
+-- Srcery
+-- local colorscheme = "srcery"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
