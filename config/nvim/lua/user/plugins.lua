@@ -157,7 +157,7 @@ return packer.startup(function(use)
 	use("ThePrimeagen/harpoon")
 
 	-- Copilot
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 
 	-- Markdown preview
 	use({
