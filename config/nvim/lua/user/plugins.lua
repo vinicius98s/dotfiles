@@ -53,6 +53,8 @@ return packer.startup(function(use)
 	use("ayu-theme/ayu-vim")
 	use("arcticicestudio/nord-vim")
 	use({ "srcery-colors/srcery-vim", as = "srcery" })
+	use({ "rose-pine/neovim", as = "rose-pine" })
+	use({ "uloco/bluloco.nvim", requires = { "rktjmp/lush.nvim" } })
 
 	-- Completion
 	use("hrsh7th/cmp-nvim-lsp")
@@ -63,33 +65,18 @@ return packer.startup(function(use)
 	use("saecki/crates.nvim")
 
 	-- LSP
-	use("neovim/nvim-lspconfig") -- enable LSP
+	use("neovim/nvim-lspconfig")
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("glepnir/lspsaga.nvim")
 	use("simrat39/rust-tools.nvim")
-
 	use({
-		"VonHeikemen/lsp-zero.nvim",
-		requires = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua" },
-
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
-		},
+		"pmizio/typescript-tools.nvim",
+		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		config = function()
+			require("typescript-tools").setup({})
+		end,
 	})
 
 	-- Snippets
@@ -149,15 +136,34 @@ return packer.startup(function(use)
 
 	-- Startup
 	use("goolord/alpha-nvim")
+	use({
+		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
+	})
 
-	-- Blazingly fast
-	use("lewis6991/impatient.nvim")
+	-- Animate
+	-- use("karb94/neoscroll.nvim")
+	use("echasnovski/mini.animate")
 
-	-- Harpoon
-	use("ThePrimeagen/harpoon")
-
-	-- Copilot
+	-- AI
 	-- use("github/copilot.vim")
+	use({
+		"dustinblackman/oatmeal.nvim",
+		config = function()
+			local oatmeal_ok, oatmeal = pcall(require, "oatmeal")
+			if not oatmeal_ok then
+				return
+			end
+
+			oatmeal.setup({
+				backend = "ollama",
+				model = "codellama:latest",
+				keys = {
+					{ "<leader>om", mode = "v", desc = "Start Oatmeal session" },
+				},
+			})
+		end,
+	})
 
 	-- Markdown preview
 	use({

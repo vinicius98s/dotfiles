@@ -11,7 +11,7 @@ end
 mason.setup()
 
 mason_lspconfig.setup({
-	ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "eslint" },
+	ensure_installed = { "lua_ls", "rust_analyzer", "eslint" },
 	automatic_installation = true,
 })
 
@@ -25,11 +25,17 @@ util.default_config = vim.tbl_extend("force", util.default_config, {
 })
 
 lspconfig.lua_ls.setup({})
-lspconfig.tsserver.setup({})
 lspconfig.tailwindcss.setup({})
 
 local jsonls_config = require("user.lsp.settings.jsonls")
 lspconfig.jsonls.setup(jsonls_config)
+
+local tt_ok, tt = pcall(require, "pmizio/typescript-tools.nvim")
+if not tt_ok then
+	return
+end
+
+tt.setup({})
 
 local rt_ok, rt = pcall(require, "rust-tools")
 if not rt_ok then

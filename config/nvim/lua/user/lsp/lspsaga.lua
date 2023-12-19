@@ -4,7 +4,11 @@ if not status_ok then
 end
 
 saga.setup({
+	ui = {
+		code_action = " ",
+	},
 	lightbulb = {
-		enable = false,
+		enable = true,
+		virtual_text = false,
 	},
 })
