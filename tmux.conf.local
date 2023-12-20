@@ -1,12 +1,48 @@
+# TPM
+set -g @plugin 'tmux-plugins/tpm'
+
+# Common bindings
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
 # Themes pack
 set -g @plugin 'jimeh/tmux-themepack'
 
 # Themes
-set -g @plugin "arcticicestudio/nord-tmux"
+
+# Nord
+# set -g @plugin 'arcticicestudio/nord-tmux'
+
+# Cyan
 # set -g @themepack 'powerline/block/cyan'
+
+# Catppuccin
+set -g @plugin 'catppuccin/tmux'
+set -g @catppuccin_flavour 'macchiato'
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W"
+
+set -g @catppuccin_status_modules_right "application session host"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator ""
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"
+set -g @catppuccin_status_connect_separator "no"
+
+# End of themes
 
 # Rename windows
 set -g @plugin 'ofirgall/tmux-window-name'
 
+# Windows session
 set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+run '~/.tmux/plugins/tpm/tpm'
 

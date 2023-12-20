@@ -5,7 +5,7 @@ end
 
 saga.setup({
 	ui = {
-		code_action = " ",
+		code_action = " ",
 	},
 	lightbulb = {
 		enable = true,
