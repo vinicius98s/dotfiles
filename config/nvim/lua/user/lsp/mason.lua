@@ -30,8 +30,9 @@ lspconfig.tailwindcss.setup({})
 local jsonls_config = require("user.lsp.settings.jsonls")
 lspconfig.jsonls.setup(jsonls_config)
 
-local tt_ok, tt = pcall(require, "pmizio/typescript-tools.nvim")
+local tt_ok, tt = pcall(require, "typescript-tools")
 if not tt_ok then
+  vim.notify("typescript lsp not installed")
 	return
 end
 
