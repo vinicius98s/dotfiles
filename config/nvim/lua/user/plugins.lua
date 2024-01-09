@@ -133,10 +133,10 @@ return packer.startup(function(use)
 
 	-- Startup
 	use("goolord/alpha-nvim")
-	use({
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-	})
+  use({
+    "nvimdev/dashboard-nvim",
+    requires = { "nvim-tree/nvim-web-devicons" }
+  })
 
 	-- Animate
 	-- use("karb94/neoscroll.nvim")

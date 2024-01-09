@@ -40,9 +40,19 @@ install_rcm() {
 	fi
 }
 
+install_curl() {
+	if ! is_installed "curl"; then
+		echo "Installing curl..."
+		sudo apt install curl
+	else
+		echo "curl is already installed"
+	fi
+}
+
 install_neovim() {
 	if ! is_installed "nvim"; then
 		echo "Installing Neovim..."
+		sudo apt install libfuse2
 		curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 		chmod u+x nvim.appimage
 		sudo mv ./nvim.appimage /usr/bin/nvim
@@ -90,11 +100,11 @@ install_zinit() {
 }
 
 install_theme() {
-	if [ ! -f $ZSH/themes/guezwhoz.zsh-theme ]; then
+	if [ ! -f $ZSH/themes/ultima.zsh-theme ]; then
 		echo "Installing zsh theme..."
-		git clone https://github.com/guesswhozzz/021011.zsh-theme $HOME/021011-tools
-		mv $HOME/021011-tools/021011.zsh-theme $ZSH/themes/guezwhoz.zsh-theme
-		rm -rf $HOME/021011-tools
+		git clone https://github.com/egorlem/ultima.zsh-theme $HOME/ultima-shell
+		mv $HOME/ultima-shell/ultima.zsh-theme $ZSH/themes/ultima.zsh-theme
+		rm -rf $HOME/ultima-shell
 	else
 		echo "Zsh theme is already installed"
 	fi
@@ -115,6 +125,21 @@ install_ripgrep() {
 		sudo apt-get install ripgrep -y
 	else
 		echo "ripgrep is already installed"
+	fi
+}
+
+install_kitty() {
+	if ! is_installed "kitty"; then
+		echo "Installing kitty..."
+		curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+		ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+		cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+		cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+		sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+		sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+	else
+		echo "kitty is already installed"
 	fi
 }
 
@@ -193,6 +218,13 @@ install_node() {
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
       asdf install nodejs latest
       asdf global nodejs latest
+
+      if ! is_installed "yarn"; then
+        echo "Installing yarn..."
+        asdf plugin-add yarn
+        asdf install yarn latest
+        asdf global yarn latest
+      fi
     else
       echo "Node.js is already installed"
     fi
@@ -204,24 +236,15 @@ install_node() {
 
 echo "Installing required programs..."
 
-install_rcm
+install_curl
 
-echo "Copying dotfiles..."
-rcup -x README.md -x ./assets -x install.sh -f
+install_rcm
 
 install_build_essential
 
 install_neovim
 
 install_packer
-
-install_zsh
-
-install_ohmyzsh
-
-install_zinit
-
-install_theme
 
 install_batcat
 
@@ -236,4 +259,17 @@ install_jetbrains_mono
 install_asdf
 
 install_node
+
+install_kitty
+
+install_zsh
+
+install_ohmyzsh
+
+install_zinit
+
+install_theme
+
+echo "Copying dotfiles..."
+rcup -x README.md -x ./assets -x install.sh -f
 

@@ -7,7 +7,7 @@ export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # ZSH_THEME="spaceship"
-ZSH_THEME="guezwhoz"
+ZSH_THEME="ultima"
 
 plugins=(git kubectl asdf)
 
