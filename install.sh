@@ -234,14 +234,43 @@ install_node() {
   fi
 }
 
+install_python() {
+  if is_installed "asdf"; then
+    if ! is_installed "python"; then
+      echo "Installing Python with asdf..."
+      asdf plugin-add python
+      asdf install python latest
+      asdf global python latest
+    else
+      echo "Python is already installed"
+    fi
+  else
+    echo "asdf cli is not available, skipping Node.js installation"
+    echo "If you already downloaded asdf, please run 'source $HOME/.zshrc' to make it's cli available"
+  fi
+}
+
+install_stylua() {
+  if ! is_installed "stylua"; then
+		version=$(get_latest_release_version "JohnnyMorganz/StyLua")
+    echo $version
+    download_url="https://github.com/JohnnyMorganz/StyLua/releases/download/$version/stylua-linux.zip"
+    echo $download_url
+    curl -LO $download_url
+    unzip ./stylua-linux.zip
+    sudo mv ./stylua /usr/bin
+    rm -f stylua-linux.zip
+  else
+      echo "stylua is already installed"
+  fi
+}
+
 echo "Installing required programs..."
 
-install_curl
-
 install_rcm
-
+ 
 install_build_essential
-
+ 
 install_neovim
 
 install_packer
@@ -260,6 +289,10 @@ install_asdf
 
 install_node
 
+install_python
+ 
+install_stylua
+ 
 install_kitty
 
 install_zsh
