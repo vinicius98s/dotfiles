@@ -102,8 +102,8 @@ neo_tree.setup({
 	-- see `:h neo-tree-custom-commands-global`
 	commands = {},
 	window = {
-		position = "float",
-		width = 20,
+		position = "left",
+		width = 35,
 		mapping_options = {
 			noremap = true,
 			nowait = true,

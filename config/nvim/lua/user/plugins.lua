@@ -106,7 +106,7 @@ return packer.startup(function(use)
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- Tree files
-	-- use("kyazdani42/nvim-tree.lua")
+	use("kyazdani42/nvim-tree.lua")
 	use("kyazdani42/nvim-web-devicons")
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
@@ -133,10 +133,10 @@ return packer.startup(function(use)
 
 	-- Startup
 	use("goolord/alpha-nvim")
-  use({
-    "nvimdev/dashboard-nvim",
-    requires = { "nvim-tree/nvim-web-devicons" }
-  })
+	use({
+		"nvimdev/dashboard-nvim",
+		requires = { "nvim-tree/nvim-web-devicons" },
+	})
 
 	-- Animate
 	-- use("karb94/neoscroll.nvim")

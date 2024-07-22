@@ -22,13 +22,13 @@ vim.cmd([[
 -- local colorscheme = "oxocarbon"
 
 -- Rose Pine
-local colorscheme = "rose-pine"
+-- local colorscheme = "rose-pine"
 
 -- Bluloco
 -- local colorscheme = "bluloco-dark"
 
 -- Tokyonight
--- local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
+local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
 
 -- Nord
 -- local colorscheme = "nord"

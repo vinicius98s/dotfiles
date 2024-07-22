@@ -33,9 +33,9 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Tree
--- keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
 -- keymap("n", "<C-b>", ":Neotree toggle reveal_file=" .. ":lua echo @%" .. "<CR>", opts)
-keymap("n", "<C-b>", ":lua NeoTreeToggleReveal()<CR>", opts)
+-- keymap("n", "<C-b>", ":lua NeoTreeToggleReveal()<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
