@@ -8,8 +8,9 @@ vim.cmd([[
 ]])
 
 -- Ayu
--- local colorscheme = "ayu"
 -- vim.g.ayucolor = "dark"
+local colorscheme = "ayu-dark"
+require("ayu").setup({})
 
 -- Material
 -- vim.g.material_style = "deep ocean"
@@ -28,13 +29,17 @@ vim.cmd([[
 -- local colorscheme = "bluloco-dark"
 
 -- Tokyonight
-local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
+-- local colorscheme = "tokyonight-night" -- "tokyonight" | "tokyonight-night" | "tokyonight-day" | "tokyonight-storm" | "tokyonight-moon"
 
 -- Nord
 -- local colorscheme = "nord"
 
 -- Srcery
 -- local colorscheme = "srcery"
+
+-- Neofusion
+-- vim.o.background = "dark"
+-- local colorscheme = "neofusion"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 

@@ -3,9 +3,4 @@ if not status_ok then
 	return
 end
 
-crates.setup({
-	null_ls = {
-		enabled = true,
-		name = "crates.nvim",
-	},
-})
+crates.setup()

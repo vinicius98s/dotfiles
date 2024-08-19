@@ -32,7 +32,7 @@ lspconfig.jsonls.setup(jsonls_config)
 
 local tt_ok, tt = pcall(require, "typescript-tools")
 if not tt_ok then
-  vim.notify("typescript lsp not installed")
+	vim.notify("typescript lsp not installed")
 	return
 end
 

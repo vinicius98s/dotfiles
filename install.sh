@@ -199,6 +199,14 @@ install_build_essential() {
   fi
 }
 
+install_mise() {
+  if ! is_installed "mise"; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
+    source $HOME/.zshrc
+  fi
+}
+
 install_asdf() {
   if [ ! -d $HOME/.asdf ]; then
     echo "Installing asdf..."
@@ -211,44 +219,36 @@ install_asdf() {
 }
 
 install_node() {
-  if is_installed "asdf"; then
+  if is_installed "mise"; then
     if ! is_installed "node"; then
-      echo "Installing Node.js with asdf..."
-      sudo apt-get install dirmngr gpg curl gawk -y
-      asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-      asdf install nodejs latest
-      asdf global nodejs latest
+      echo "Installing Node.js with mise..."
+      mise use --global node@latest
 
       if ! is_installed "yarn"; then
         echo "Installing yarn..."
-        asdf plugin-add yarn
-        asdf install yarn latest
-        asdf global yarn latest
+        mise plugin i yarn
+        mise use --global yarn@1
       fi
     else
       echo "Node.js is already installed"
     fi
   else
-    echo "asdf cli is not available, skipping Node.js installation"
-    echo "If you already downloaded asdf, please run 'source $HOME/.zshrc' to make it's cli available"
+    echo "mise cli is not available, skipping Node.js installation"
+    echo "If you already downloaded mise, please run 'source $HOME/.zshrc' to make it's cli available"
   fi
 }
 
 install_python() {
-  if is_installed "asdf"; then
+  if is_installed "mise"; then
     if ! is_installed "python"; then
-      echo "Installing Python with asdf..."
-      sudo apt update
-      sudo apt install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
-      asdf plugin-add python
-      asdf install python latest
-      asdf global python latest
+      echo "Installing Python with mise..."
+      mise use --global python@latest
     else
       echo "Python is already installed"
     fi
   else
-    echo "asdf cli is not available, skipping Node.js installation"
-    echo "If you already downloaded asdf, please run 'source $HOME/.zshrc' to make it's cli available"
+    echo "mise cli is not available, skipping Python installation"
+    echo "If you already downloaded mise, please run 'source $HOME/.zshrc' to make it's cli available"
   fi
 }
 
@@ -267,9 +267,12 @@ install_stylua() {
   fi
 }
 
-echo "Installing required programs..."
-
 install_rcm
+
+echo "Copying dotfiles..."
+rcup -x README.md -x ./assets -x install.sh -f
+
+echo "Installing required programs..."
  
 install_build_essential
  
@@ -287,7 +290,9 @@ install_tpm
 
 install_jetbrains_mono
 
-install_asdf
+install_mise
+
+# install_asdf
 
 install_node
 
@@ -304,7 +309,4 @@ install_ohmyzsh
 install_zinit
 
 install_theme
-
-echo "Copying dotfiles..."
-rcup -x README.md -x ./assets -x install.sh -f
 

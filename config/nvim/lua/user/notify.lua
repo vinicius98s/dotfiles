@@ -31,9 +31,14 @@ vim.notify = notify
 
 local notify_filter = vim.notify
 vim.notify = function(msg, ...)
+	if msg:match("No information available") then
+		return
+	end
+
 	if msg:match("character_offset must be called") then
 		return
 	end
+
 	if msg:match("method textDocument") then
 		return
 	end
