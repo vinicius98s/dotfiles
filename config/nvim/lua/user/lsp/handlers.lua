@@ -24,6 +24,7 @@ end
 
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Lspsaga finder<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Lspsaga finder<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc ++silent<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
