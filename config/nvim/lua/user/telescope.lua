@@ -57,7 +57,7 @@ local options = {
 		},
 	},
 
-	extensions_list = { "fzy_native" },
+	extensions_list = { "fzy_native", "yaml_schema" },
 }
 
 telescope.setup(options)

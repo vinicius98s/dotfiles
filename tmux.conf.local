@@ -16,16 +16,19 @@ set -g @plugin 'jimeh/tmux-themepack'
 # set -g @themepack 'powerline/block/cyan'
 
 # Catppuccin
-set -g @plugin 'catppuccin/tmux'
-set -g @catppuccin_flavor 'macchiato'
+set -g @plugin 'catppuccin/tmux#latest'
+set -g @catppuccin_flavor 'mocha' # latte,frappe, macchiato or mocha
+set -g @catppuccin_status_modules_right ''
 
 # End of themes
 
 # Rename windows
-set -g @plugin 'ofirgall/tmux-window-name'
+# set -g @plugin 'ofirgall/tmux-window-name'
 
 # Windows session
 set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-restore 'on'
 
 run '~/.tmux/plugins/tpm/tpm'
 

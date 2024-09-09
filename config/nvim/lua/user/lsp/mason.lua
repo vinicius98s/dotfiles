@@ -40,7 +40,15 @@ tt.setup({})
 
 local rt_ok, rt = pcall(require, "rust-tools")
 if not rt_ok then
+	vim.notify("rust lsp not installed")
 	return
 end
 local rust_analyzer_config = require("user.lsp.settings.rust-analyzer")
 rt.setup(rust_analyzer_config)
+
+local yaml_ok, yaml = pcall(require, "yaml-companion")
+if not yaml_ok then
+	vim.notify("yaml lsp not installed")
+	return
+end
+lspconfig.yamlls.setup(yaml.setup({}))

@@ -1,8 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-# Fig pre block. Keep at the top of this file.
-[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
 export ERL_AFLAGS="-kernel shell_history enabled"
 
@@ -12,6 +7,7 @@ ZSH_THEME="ultima"
 plugins=(git kubectl asdf)
 
 source $ZSH/oh-my-zsh.sh
+source <(kubectl completion zsh)
 
 fpath=(${ASDF_DIR}/completions $fpath)
 [ -f ~/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
@@ -75,5 +71,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(~/.local/bin/mise activate zsh)"
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
