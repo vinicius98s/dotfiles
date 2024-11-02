@@ -74,13 +74,6 @@ keymap("n", "<ESC>", ":nohlsearch<Return><ESC>", opts)
 keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)
 keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 
--- Harpoon
-keymap("n", "<leader>hh", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
-keymap("n", "<leader>ha", ":lua require('harpoon.mark').add_file()<CR>", opts)
-keymap("n", "<leader>h1", ":lua require('harpoon.ui').nav_file(1)<CR>", opts)
-keymap("n", "<leader>h2", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
-keymap("n", "<leader>h3", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
-
 -- Insert --
 -- Press jj fast to enter
 keymap("i", "jj", "<ESC>", opts)

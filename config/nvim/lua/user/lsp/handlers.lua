@@ -13,12 +13,13 @@ M.setup = function()
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "", spacing = 6 })
 	end
 
-	vim.diagnostic.config({
-		virtual_text = { spacing = 6, prefix = "" },
-		signs = true,
-		underline = true,
-		update_in_insert = false,
-		severity_sort = false,
+	vim.diagnostic.config({ virtual_text = false })
+	require("tiny-inline-diagnostic").setup({
+		signs = {
+			left = " ",
+			right = " ",
+			diag = "",
+		},
 	})
 end
 
@@ -32,7 +33,7 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
 end
 
 M.on_attach = function(client, bufnr)

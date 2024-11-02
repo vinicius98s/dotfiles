@@ -73,6 +73,8 @@ return packer.startup(function(use)
 	use("mhartington/formatter.nvim")
 	use("glepnir/lspsaga.nvim")
 	use("simrat39/rust-tools.nvim")
+	use("RaafatTurki/corn.nvim")
+	use("rachartier/tiny-inline-diagnostic.nvim")
 	use({
 		"pmizio/typescript-tools.nvim",
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
