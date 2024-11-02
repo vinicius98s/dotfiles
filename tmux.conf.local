@@ -15,10 +15,14 @@ set -g @plugin 'jimeh/tmux-themepack'
 # Cyan
 # set -g @themepack 'powerline/block/cyan'
 
+# Rose Pine
+set -g @plugin 'rose-pine/tmux'
+set -g @rose_pine_variant 'main'
+
 # Catppuccin
-set -g @plugin 'catppuccin/tmux#latest'
-set -g @catppuccin_flavor 'mocha' # latte,frappe, macchiato or mocha
-set -g @catppuccin_status_modules_right ''
+# set -g @plugin 'catppuccin/tmux#latest'
+# set -g @catppuccin_flavor 'mocha' # latte,frappe, macchiato or mocha
+# set -g @catppuccin_status_modules_right ''
 
 # End of themes
 

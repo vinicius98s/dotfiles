@@ -2,13 +2,13 @@
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
+	vim.notify("nvim-tree not installed")
 	return
 end
 
 -- Remove status line on NvimTree
-vim.cmd(
-	[[au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree_1" | set laststatus=0 | else | set laststatus=3 | endif]]
-)
+vim.cmd([[au BufEnter * if bufname('%') == "NvimTree_1" | set laststatus=0 | endif]])
+vim.cmd([[au BufLeave * if bufname('%') == "NvimTree_1" | set laststatus=3 | endif]])
 
 nvim_tree.setup({
 	disable_netrw = true,

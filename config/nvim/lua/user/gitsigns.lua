@@ -7,9 +7,9 @@ gitsigns.setup({
 	signs = {
 		add = { text = "▎" },
 		change = { text = "▎" },
-		delete = {  text = "▎" },
-		topdelete = {  text = "▎" },
-		changedelete = {  text = "▎" },
+		delete = { text = "▎" },
+		topdelete = { text = "▎" },
+		changedelete = { text = "▎" },
 	},
 	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -38,8 +38,5 @@ gitsigns.setup({
 		relative = "cursor",
 		row = 0,
 		col = 1,
-	},
-	yadm = {
-		enable = false,
 	},
 })
