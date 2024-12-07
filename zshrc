@@ -54,6 +54,9 @@ if is_installed "batcat"; then
   alias cat="batcat --paging=never"
 fi 
 
+#nvim
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
 # pnpm
 export PNPM_HOME="/home/vinicius/.local/share/pnpm"
 case ":$PATH:" in

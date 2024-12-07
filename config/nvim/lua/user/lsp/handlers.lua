@@ -15,10 +15,16 @@ M.setup = function()
 
 	vim.diagnostic.config({ virtual_text = false })
 	require("tiny-inline-diagnostic").setup({
+		preset = "powerline",
 		signs = {
 			left = " ",
 			right = " ",
 			diag = "",
+		},
+		options = {
+			virt_texts = {
+				priority = 2048,
+			},
 		},
 	})
 end

@@ -24,8 +24,9 @@ gitsigns.setup({
 	current_line_blame_opts = {
 		virt_text = true,
 		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-		delay = 500,
+		delay = 250,
 		ignore_whitespace = false,
+		virt_text_priority = 1,
 	},
 	sign_priority = 6,
 	update_debounce = 100,

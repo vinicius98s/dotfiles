@@ -9,12 +9,12 @@ vim.cmd([[
 
 -- Ayu
 -- vim.g.ayucolor = "dark"
-local colorscheme = "ayu-dark"
-require("ayu").setup({})
+-- local colorscheme = "ayu-dark"
+-- require("ayu").setup({})
 
 -- Material
--- vim.g.material_style = "deep ocean"
--- local colorscheme = "material"
+vim.g.material_style = "deep ocean"
+local colorscheme = "material"
 
 -- nightfox
 -- local colorscheme = "nightfox"
@@ -40,6 +40,12 @@ require("ayu").setup({})
 -- Neofusion
 -- vim.o.background = "dark"
 -- local colorscheme = "neofusion"
+
+-- Tokyodark
+-- local colorscheme = "tokyodark"
+
+-- Calvera
+-- local colorscheme = "calvera"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
