@@ -278,7 +278,7 @@ install_build_essential
  
 install_neovim
 
-install_packer
+# install_packer
 
 install_batcat
 

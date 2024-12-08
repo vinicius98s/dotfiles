@@ -1,3 +1,5 @@
+set -g mode-keys vi
+
 # TPM
 set -g @plugin 'tmux-plugins/tpm'
 
