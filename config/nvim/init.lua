@@ -77,6 +77,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -111,6 +113,24 @@ require("lazy").setup({
 					topdelete = { text = "▎" },
 					changedelete = { text = "▎" },
 				},
+				current_line_blame = true,
+				current_line_blame_opts = {
+					delay = 250,
+					virt_text_pos = "right_align",
+				},
+				on_attach = function()
+					local gitsigns = require("gitsigns")
+
+					vim.keymap.set("n", "<leader>p", gitsigns.preview_hunk, { desc = "[p]review git hunk" })
+					vim.keymap.set("n", "<leader>pr", gitsigns.reset_hunk, { desc = "[r]eset git hunk" })
+					vim.keymap.set("n", "]c", function()
+						gitsigns.nav_hunk("next")
+					end, { desc = "Jump to next git [c]hange" })
+					vim.keymap.set("n", "[c", function()
+						gitsigns.nav_hunk("prev")
+					end, { desc = "Jump to previous git [c]hange" })
+					vim.keymap.set({ "n", "v" }, "<leader>ps", gitsigns.stage_hunk, { desc = "stage git hunk" })
+				end,
 			},
 		},
 
@@ -186,7 +206,24 @@ require("lazy").setup({
 			},
 			config = function()
 				local telescope = require("telescope")
+				local actions = require("telescope.actions")
 				telescope.setup({
+					defaults = {
+						prompt_prefix = "   ",
+						selection_caret = "  ",
+						entry_prefix = "  ",
+						mappings = {
+							i = {
+								["<C-j>"] = actions.move_selection_next,
+								["<C-k>"] = actions.move_selection_previous,
+							},
+							n = {
+								["q"] = actions.close,
+								["<C-j>"] = actions.move_selection_next,
+								["<C-k>"] = actions.move_selection_previous,
+							},
+						},
+					},
 					extensions = {
 						["ui-select"] = {
 							require("telescope.themes").get_dropdown(),
@@ -227,11 +264,11 @@ require("lazy").setup({
 		{ "Bilal2453/luvit-meta", lazy = true },
 
 		{
-			"folke/tokyonight.nvim",
+			"ficcdaf/ashen.nvim",
+			lazy = false,
 			priority = 1000,
 			init = function()
-				vim.cmd.colorscheme("tokyonight-night")
-				vim.cmd.hi("Comment gui=none")
+				vim.cmd.colorscheme("ashen")
 			end,
 		},
 
@@ -253,19 +290,16 @@ require("lazy").setup({
 		{
 			"nvim-lualine/lualine.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
-			config = function()
-				local lualine = require("lualine")
-				lualine.setup({})
-			end,
+			opts = {},
 		},
 
 		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
-				"williamboman/mason.nvim",
+				{ "williamboman/mason.nvim", config = true },
 				"williamboman/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				"j-hui/fidget.nvim",
+				{ "j-hui/fidget.nvim", opts = {} },
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/nvim-cmp",
 			},
@@ -282,7 +316,7 @@ require("lazy").setup({
 						map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 						map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 						map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-						map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+						-- map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 						map(
 							"<leader>ws",
 							require("telescope.builtin").lsp_dynamic_workspace_symbols,
@@ -291,6 +325,7 @@ require("lazy").setup({
 						map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 						map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 						map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+						map("<leader>d", vim.diagnostic.open_float, "Open [d]iagnostics")
 
 						local client = vim.lsp.get_client_by_id(event.data.client_id)
 						if
@@ -356,8 +391,11 @@ require("lazy").setup({
 				require("mason-tool-installer").setup({
 					ensure_installed = {
 						"stylua",
-						"prettierd",
+						-- "prettier",
 						"eslint-lsp",
+						"tailwindcss-language-server",
+						"jsonlint",
+						"hadolint",
 					},
 				})
 
@@ -389,7 +427,7 @@ require("lazy").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
 					rust = { "rustfmt" },
-					javascript = { "prettierd", "prettier", stop_after_first = true },
+					javascript = { "prettier" },
 				},
 			},
 		},
@@ -419,6 +457,14 @@ require("lazy").setup({
 				local cmp = require("cmp")
 				local luasnip = require("luasnip")
 				luasnip.config.setup({})
+
+				vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+					callback = function()
+						if luasnip.expand_or_jumpable() then
+							luasnip.unlink_current()
+						end
+					end,
+				})
 
 				cmp.setup({
 					snippet = {
@@ -455,6 +501,8 @@ require("lazy").setup({
 			opts = {
 				ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "markdown", "markdown_inline" },
 				auto_install = true,
+				highlight = { enable = true },
+				indent = { enable = true },
 			},
 		},
 
@@ -495,6 +543,18 @@ require("lazy").setup({
 							lint.try_lint()
 						end
 					end,
+				})
+			end,
+		},
+
+		{
+			"rachartier/tiny-inline-diagnostic.nvim",
+			event = "VeryLazy", -- Or `LspAttach`
+			priority = 1000, -- needs to be loaded in first
+			config = function()
+				vim.diagnostic.config({ virtual_text = false })
+				require("tiny-inline-diagnostic").setup({
+					preset = "powerline",
 				})
 			end,
 		},

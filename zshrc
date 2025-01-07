@@ -58,7 +58,7 @@ fi
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # pnpm
-export PNPM_HOME="/home/vinicius/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -66,11 +66,15 @@ esac
 # pnpm end
 
 # bun completions
-[ -s "/home/vinicius/.bun/_bun" ] && source "/home/vinicius/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# fly.io
+export FLYCTL_INSTALL="$HOME/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 eval "$(~/.local/bin/mise activate zsh)"
 

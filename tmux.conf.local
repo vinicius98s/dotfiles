@@ -17,9 +17,11 @@ set -g @plugin 'jimeh/tmux-themepack'
 # Cyan
 # set -g @themepack 'powerline/block/cyan'
 
+set -g @themepack 'powerline/block/gray'
+
 # Rose Pine
-set -g @plugin 'rose-pine/tmux'
-set -g @rose_pine_variant 'main'
+# set -g @plugin 'rose-pine/tmux'
+# set -g @rose_pine_variant 'main'
 
 # Catppuccin
 # set -g @plugin 'catppuccin/tmux#latest'
