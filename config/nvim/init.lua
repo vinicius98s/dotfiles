@@ -264,11 +264,11 @@ require("lazy").setup({
 		{ "Bilal2453/luvit-meta", lazy = true },
 
 		{
-			"ficcdaf/ashen.nvim",
+			"nyoom-engineering/oxocarbon.nvim",
 			lazy = false,
 			priority = 1000,
 			init = function()
-				vim.cmd.colorscheme("ashen")
+				vim.cmd.colorscheme("oxocarbon")
 			end,
 		},
 

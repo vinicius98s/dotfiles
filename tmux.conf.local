@@ -6,6 +6,9 @@ set -g @plugin 'tmux-plugins/tpm'
 # Common bindings
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
+# Destroy window without detaching
+set-option -g detach-on-destroy off
+
 # Themes pack
 set -g @plugin 'jimeh/tmux-themepack'
 
