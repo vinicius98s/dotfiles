@@ -373,15 +373,6 @@ require("lazy").setup({
 					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 				local servers = {
-					rust_analyzer = {
-						settings = {
-							["rust-analyzer"] = {
-								checkOnSave = {
-									command = "clippy",
-								},
-							},
-						},
-					},
 					lua_ls = {},
 					ts_ls = {},
 				}
@@ -391,7 +382,7 @@ require("lazy").setup({
 				require("mason-tool-installer").setup({
 					ensure_installed = {
 						"stylua",
-						-- "prettier",
+						"prettier",
 						"eslint-lsp",
 						"tailwindcss-language-server",
 						"jsonlint",
@@ -557,6 +548,22 @@ require("lazy").setup({
 					preset = "powerline",
 				})
 			end,
+		},
+
+		{
+			"iamcco/markdown-preview.nvim",
+			cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+			build = "cd app && yarn install",
+			init = function()
+				vim.g.mkdp_filetypes = { "markdown" }
+			end,
+			ft = { "markdown" },
+		},
+
+		{
+			"mrcjkb/rustaceanvim",
+			version = "^5", -- Recommended
+			lazy = false, -- This plugin is already lazy
 		},
 	},
 

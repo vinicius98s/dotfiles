@@ -207,17 +207,6 @@ install_mise() {
   fi
 }
 
-install_asdf() {
-  if [ ! -d $HOME/.asdf ]; then
-    echo "Installing asdf..."
-    asdf_version=$(get_latest_release_version "asdf-vm/asdf")
-    echo "asdf version: $asdf_version"
-    git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch $asdf_version
-  else
-    echo "Found asdf folder at $HOME/.asdf"
-  fi
-}
-
 install_node() {
   if is_installed "mise"; then
     if ! is_installed "node"; then
