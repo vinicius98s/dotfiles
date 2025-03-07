@@ -4,13 +4,10 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # ZSH_THEME="spaceship"
 ZSH_THEME="ultima"
 
-plugins=(git kubectl asdf)
+plugins=(git kubectl)
 
 source $ZSH/oh-my-zsh.sh
 source <(kubectl completion zsh)
-
-fpath=(${ASDF_DIR}/completions $fpath)
-[ -f ~/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
 
 ### Added by Zinit's installer
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -27,9 +24,6 @@ zinit light-mode for \
   zdharma-continuum/fast-syntax-highlighting \
   zsh-users/zsh-autosuggestions \
   zsh-users/zsh-completions
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[ ! -f ~/.p10k.zsh ] || source ~/.p10k.zsh
 
 if [ ! -f ~/.gitconfig ]; then
   git config --global core.editor "vi"
