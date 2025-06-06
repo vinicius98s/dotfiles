@@ -134,11 +134,11 @@ require("lazy").setup({
 			},
 		},
 
-		{
-			"folke/which-key.nvim",
-			event = "VeryLazy",
-			opts = {},
-		},
+		-- {
+		-- 	"folke/which-key.nvim",
+		-- 	event = "VeryLazy",
+		-- 	opts = {},
+		-- },
 
 		{
 			"folke/snacks.nvim",
@@ -235,9 +235,9 @@ require("lazy").setup({
 				telescope.load_extension("ui-select")
 
 				local builtin = require("telescope.builtin")
-				vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+				vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Search Files" })
 				vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-				vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+				vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search by Grep" })
 				vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 				-- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 			end,
@@ -296,12 +296,11 @@ require("lazy").setup({
 		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
-				{ "williamboman/mason.nvim", config = true },
-				"williamboman/mason-lspconfig.nvim",
+				{ "mason-org/mason.nvim", opts = {} },
+				"mason-org/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
 				{ "j-hui/fidget.nvim", opts = {} },
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/nvim-cmp",
+				"saghen/blink.cmp",
 			},
 			config = function()
 				vim.api.nvim_create_autocmd("LspAttach", {
@@ -327,9 +326,22 @@ require("lazy").setup({
 						map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 						map("<leader>d", vim.diagnostic.open_float, "Open [d]iagnostics")
 
+						local function client_supports_method(client, method, bufnr)
+							if vim.fn.has("nvim-0.11") == 1 then
+								return client:supports_method(method, bufnr)
+							else
+								return client.supports_method(method, { bufnr = bufnr })
+							end
+						end
+
 						local client = vim.lsp.get_client_by_id(event.data.client_id)
 						if
-							client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight)
+							client
+							and client_supports_method(
+								client,
+								vim.lsp.protocol.Methods.textDocument_documentHighlight,
+								event.buf
+							)
 						then
 							local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 							vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -353,7 +365,14 @@ require("lazy").setup({
 							})
 						end
 
-						if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+						if
+							client
+							and client_supports_method(
+								client,
+								vim.lsp.protocol.Methods.textDocument_inlayHint,
+								event.buf
+							)
+						then
 							map("<leader>th", function()
 								vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 							end, "[T]oggle Inlay [H]ints")
@@ -368,41 +387,58 @@ require("lazy").setup({
 				end
 				vim.diagnostic.config({ signs = { text = diagnostic_signs } })
 
-				local capabilities = vim.lsp.protocol.make_client_capabilities()
-				capabilities =
-					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-				local servers = {
-					lua_ls = {},
-					ts_ls = {},
-				}
-
 				require("mason").setup()
 
-				require("mason-tool-installer").setup({
-					ensure_installed = {
-						"stylua",
-						"prettier",
-						"eslint-lsp",
-						"tailwindcss-language-server",
-						"jsonlint",
-						"hadolint",
-					},
+				local servers = {
+					rust_analyzer = {},
+					-- ts_ls = {},
+					lua_ls = {},
+				}
+
+				local ensure_installed = vim.tbl_keys(servers or {})
+				vim.list_extend(ensure_installed, {
+					"stylua",
+					"prettierd",
+					"prettier",
+					"eslint-lsp",
+					"tailwindcss-language-server",
+					"jsonlint",
 				})
 
+				require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
 				require("mason-lspconfig").setup({
-					ensure_installed = vim.tbl_keys(servers or {}),
-					automatic_installation = true,
-					handlers = {
-						function(server_name)
-							local server = servers[server_name] or {}
-							server.capabilities =
-								vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-							require("lspconfig")[server_name].setup(server)
-						end,
-					},
+					ensure_installed = {},
+					automatic_enable = true,
 				})
 			end,
+		},
+
+		{
+			"saghen/blink.cmp",
+			dependencies = { "rafamadriz/friendly-snippets" },
+			version = "1.*",
+
+			---@module 'blink.cmp'
+			---@type blink.cmp.Config
+			opts = {
+				keymap = { preset = "default" },
+				appearance = {
+					nerd_font_variant = "mono",
+				},
+				completion = { documentation = { auto_show = false } },
+				sources = {
+					default = { "lsp", "path", "snippets", "buffer" },
+				},
+				fuzzy = { implementation = "prefer_rust_with_warning" },
+			},
+			opts_extend = { "sources.default" },
+		},
+
+		{
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			opts = {},
 		},
 
 		{
@@ -410,7 +446,7 @@ require("lazy").setup({
 			event = { "BufWritePre" },
 			cmd = { "ConformInfo" },
 			opts = {
-				notify_on_error = false,
+				-- notify_on_error = false,
 				format_on_save = {
 					lsp_format = "fallback",
 					timeout_ms = 500,
@@ -418,7 +454,7 @@ require("lazy").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
 					rust = { "rustfmt" },
-					javascript = { "prettier" },
+					javascript = { "prettierd", "prettier", stop_after_first = true },
 				},
 			},
 		},
@@ -564,6 +600,21 @@ require("lazy").setup({
 			"mrcjkb/rustaceanvim",
 			version = "^5", -- Recommended
 			lazy = false, -- This plugin is already lazy
+		},
+
+		{
+			"supermaven-inc/supermaven-nvim",
+			config = function()
+				require("supermaven-nvim").setup({})
+			end,
+		},
+
+		{
+			"mvllow/modes.nvim",
+			tag = "v0.2.1",
+			config = function()
+				require("modes").setup()
+			end,
 		},
 	},
 
