@@ -49,7 +49,8 @@ if is_installed "batcat"; then
 fi 
 
 #nvim
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/nvim-linux-arm64/bin"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -70,5 +71,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$($HOME/.local/bin/mise activate zsh)"
 
