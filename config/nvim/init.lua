@@ -77,15 +77,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
 		{
 			"stevearc/oil.nvim",
-			---@module 'oil'
-			---@type oil.SetupOpts
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
 				local oil = require("oil")
@@ -197,7 +193,7 @@ require("lazy").setup({
 
 		{
 			"nvim-telescope/telescope.nvim",
-			branch = "0.1.x",
+			branch = "master",
 			event = "VimEnter",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
@@ -239,12 +235,13 @@ require("lazy").setup({
 				vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 				vim.keymap.set("n", "<C-f>", builtin.live_grep, { desc = "Search by Grep" })
 				vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-				-- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+				-- vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			end,
 		},
 
 		{
 			"j-morano/buffer_manager.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
 				local ui = require("buffer_manager.ui")
 				vim.keymap.set("n", "<leader><leader>", ui.toggle_quick_menu, { desc = "[ ] Find existing buffers" })
@@ -252,25 +249,23 @@ require("lazy").setup({
 		},
 
 		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {
-				library = {
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				},
-			},
-		},
-
-		{ "Bilal2453/luvit-meta", lazy = true },
-
-		{
-			"nyoom-engineering/oxocarbon.nvim",
+			"projekt0n/github-nvim-theme",
+			name = "github-theme",
 			lazy = false,
 			priority = 1000,
-			init = function()
-				vim.cmd.colorscheme("oxocarbon")
+			config = function()
+				vim.cmd.colorscheme("github_dark_colorblind")
 			end,
 		},
+
+		-- {
+		-- 	"dgox16/oldworld.nvim",
+		-- 	lazy = false,
+		-- 	priority = 1000,
+		-- 	config = function()
+		-- 		vim.cmd.colorscheme("oldworld")
+		-- 	end,
+		-- },
 
 		{
 			"echasnovski/mini.nvim",
@@ -296,10 +291,10 @@ require("lazy").setup({
 		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
-				{ "mason-org/mason.nvim", opts = {} },
+				"mason-org/mason.nvim",
 				"mason-org/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				{ "j-hui/fidget.nvim", opts = {} },
+				"j-hui/fidget.nvim",
 				"saghen/blink.cmp",
 			},
 			config = function()
@@ -315,12 +310,7 @@ require("lazy").setup({
 						map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 						map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 						map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-						-- map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-						map(
-							"<leader>ws",
-							require("telescope.builtin").lsp_dynamic_workspace_symbols,
-							"[W]orkspace [S]ymbols"
-						)
+						map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 						map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 						map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 						map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -389,17 +379,13 @@ require("lazy").setup({
 
 				require("mason").setup()
 
-				local servers = {
-					rust_analyzer = {},
-					-- ts_ls = {},
-					lua_ls = {},
-				}
-
-				local ensure_installed = vim.tbl_keys(servers or {})
+				local ensure_installed = vim.tbl_keys({})
 				vim.list_extend(ensure_installed, {
 					"stylua",
+					-- "elixir-ls",
 					"prettierd",
-					"prettier",
+					-- "prettier",
+					"lua-language-server",
 					"eslint-lsp",
 					"tailwindcss-language-server",
 					"jsonlint",
@@ -418,15 +404,18 @@ require("lazy").setup({
 			"saghen/blink.cmp",
 			dependencies = { "rafamadriz/friendly-snippets" },
 			version = "1.*",
-
-			---@module 'blink.cmp'
-			---@type blink.cmp.Config
 			opts = {
-				keymap = { preset = "default" },
+				signature = { enabled = true },
+				keymap = {
+					preset = "default",
+					["<C-k>"] = { "select_prev", "fallback" },
+					["<C-j>"] = { "select_next", "fallback" },
+					["<CR>"] = { "accept", "fallback" },
+				},
 				appearance = {
 					nerd_font_variant = "mono",
 				},
-				completion = { documentation = { auto_show = false } },
+				-- completion = { auto_insert = false },
 				sources = {
 					default = { "lsp", "path", "snippets", "buffer" },
 				},
@@ -435,11 +424,11 @@ require("lazy").setup({
 			opts_extend = { "sources.default" },
 		},
 
-		{
-			"pmizio/typescript-tools.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-			opts = {},
-		},
+		-- {
+		-- 	"pmizio/typescript-tools.nvim",
+		-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		-- 	opts = {},
+		-- },
 
 		{
 			"stevearc/conform.nvim",
@@ -462,63 +451,7 @@ require("lazy").setup({
 		{
 			"saecki/crates.nvim",
 			tag = "stable",
-			config = function()
-				require("crates").setup({})
-			end,
-		},
-
-		{
-			"hrsh7th/nvim-cmp",
-			event = "InsertEnter",
-			dependencies = {
-				{
-					"L3MON4D3/LuaSnip",
-					version = "v2.*",
-					build = "make install_jsregexp",
-				},
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-path",
-			},
-			config = function()
-				local cmp = require("cmp")
-				local luasnip = require("luasnip")
-				luasnip.config.setup({})
-
-				vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-					callback = function()
-						if luasnip.expand_or_jumpable() then
-							luasnip.unlink_current()
-						end
-					end,
-				})
-
-				cmp.setup({
-					snippet = {
-						expand = function(args)
-							luasnip.lsp_expand(args.body)
-						end,
-					},
-					completion = { completeopt = "menu,menuone,noinsert" },
-					mapping = cmp.mapping.preset.insert({
-						["<C-j>"] = cmp.mapping.select_next_item(),
-						["<C-k>"] = cmp.mapping.select_prev_item(),
-
-						["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-						["<C-Space>"] = cmp.mapping.complete({}),
-					}),
-					sources = {
-						{
-							name = "lazydev",
-							group_index = 0,
-						},
-						{ name = "nvim_lsp" },
-						{ name = "luasnip" },
-						{ name = "path" },
-					},
-				})
-			end,
+			opts = {},
 		},
 
 		{
@@ -526,7 +459,7 @@ require("lazy").setup({
 			build = ":TSUpdate",
 			main = "nvim-treesitter.configs",
 			opts = {
-				ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx", "markdown", "markdown_inline" },
+				ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx" },
 				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
@@ -564,6 +497,10 @@ require("lazy").setup({
 			config = function()
 				local lint = require("lint")
 
+				lint.linters_by_ft = {
+					markdown = {},
+				}
+
 				vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 					callback = function()
 						if vim.opt_local.modifiable:get() then
@@ -598,23 +535,37 @@ require("lazy").setup({
 
 		{
 			"mrcjkb/rustaceanvim",
-			version = "^5", -- Recommended
-			lazy = false, -- This plugin is already lazy
+			version = "^5",
+			lazy = false,
 		},
 
+		-- {
+		-- 	"supermaven-inc/supermaven-nvim",
+		-- 	opts = {},
+		-- },
+
 		{
-			"supermaven-inc/supermaven-nvim",
-			config = function()
-				require("supermaven-nvim").setup({})
-			end,
+			"olimorris/codecompanion.nvim",
+			opts = {
+				ignore_warnings = true,
+			},
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"github/copilot.vim",
+			},
 		},
 
 		{
 			"mvllow/modes.nvim",
 			tag = "v0.2.1",
-			config = function()
-				require("modes").setup()
-			end,
+			opts = {},
+		},
+
+		{
+			"akinsho/bufferline.nvim",
+			version = "*",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			opts = {},
 		},
 	},
 

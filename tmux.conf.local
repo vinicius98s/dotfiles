@@ -1,3 +1,6 @@
+set-option -s repeat-time 0
+set-option -sg escape-time 0
+
 set -g mode-keys vi
 
 # TPM
@@ -20,7 +23,7 @@ set -g @plugin 'jimeh/tmux-themepack'
 # Cyan
 # set -g @themepack 'powerline/block/cyan'
 
-set -g @themepack 'powerline/block/gray'
+# set -g @themepack 'powerline/block/gray'
 
 # Rose Pine
 # set -g @plugin 'rose-pine/tmux'
@@ -31,10 +34,10 @@ set -g @themepack 'powerline/block/gray'
 # set -g @catppuccin_flavor 'mocha' # latte,frappe, macchiato or mocha
 # set -g @catppuccin_status_modules_right ''
 
-# End of themes
+# Flexoki Dark
+source-file ./flexoki-dark.tmuxtheme
 
-# Rename windows
-# set -g @plugin 'ofirgall/tmux-window-name'
+# End of themes
 
 # Windows session
 set -g @plugin 'tmux-plugins/tmux-resurrect'

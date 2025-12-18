@@ -4,7 +4,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # ZSH_THEME="spaceship"
 ZSH_THEME="ultima"
 
-plugins=(git kubectl)
+plugins=(git kubectl direnv)
 
 source $ZSH/oh-my-zsh.sh
 source <(kubectl completion zsh)
@@ -73,3 +73,16 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 eval "$($HOME/.local/bin/mise activate zsh)"
 
+eval $(twilio autocomplete:script zsh)
+
+export JJ_EDITOR=vi
+
+alias vim="nvim"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/vinicius/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# opencode
+export PATH=/home/vinicius/.opencode/bin:$PATH
