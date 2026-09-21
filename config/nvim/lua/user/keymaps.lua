@@ -15,6 +15,12 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Search will center on the line it's 
 
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
 
+vim.keymap.set("n", "<leader>cap", ':let @+ = expand("%:p")<CR>', { desc = "Copy absolute path" })
+
+vim.keymap.set("n", "<leader>crp", ':let @+ = expand("%")<CR>', { desc = "Copy relative path" })
+
+vim.keymap.set("n", "<leader>cfn", ':let @+ = expand("%:t")<CR>', { desc = "Copy file name" })
+
 -- Insert mode
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Escape" })
 
@@ -25,6 +31,9 @@ vim.keymap.set("v", ">", ">gv", { desc = "Stay in ident mode", silent = true })
 -- Visual Block mode
 vim.keymap.set("x", "J", ":move '>+1<CR>gv=gv", { desc = "Move text up", silent = true })
 vim.keymap.set("x", "K", ":move '<-2<CR>gv=gv", { desc = "Move text down", silent = true })
+
+-- Terminal mode
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.cmd("cnoreabbrev W! w!")
 vim.cmd("cnoreabbrev Q! q!")

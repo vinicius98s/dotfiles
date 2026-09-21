@@ -1,8 +1,9 @@
-export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # ZSH_THEME="spaceship"
-ZSH_THEME="ultima"
+# ZSH_THEME="ultima"
+ZSH_THEME="ayu-dark"
 
 plugins=(git kubectl direnv)
 
@@ -25,6 +26,12 @@ zinit light-mode for \
   zsh-users/zsh-autosuggestions \
   zsh-users/zsh-completions
 
+# fast-syntax-highlighting theme (config/zsh/fsh/ayu-dark.ini, linked to ~/.config/fsh).
+# fast-theme persists its output to ~/.cache/fsh, so re-apply it if that is gone.
+if [[ "$FAST_THEME_NAME" != "ayu-dark" ]]; then
+  fast-theme XDG:ayu-dark >/dev/null 2>&1
+fi
+
 if [ ! -f ~/.gitconfig ]; then
   git config --global core.editor "vi"
   git config --global user.email "vinicius.2010.s@gmail.com"
@@ -46,7 +53,11 @@ is_installed() {
 
 if is_installed "batcat"; then
   alias cat="batcat --paging=never"
-fi 
+fi
+
+if is_installed "fdfind"; then
+  alias fd="fdfind"
+fi
 
 #nvim
 export PATH="$PATH:/opt/nvim-linux-arm64/bin"
@@ -78,11 +89,6 @@ eval $(twilio autocomplete:script zsh)
 export JJ_EDITOR=vi
 
 alias vim="nvim"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/vinicius/.lmstudio/bin"
-# End of LM Studio CLI section
-
 
 # opencode
 export PATH=/home/vinicius/.opencode/bin:$PATH

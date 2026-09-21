@@ -58,6 +58,7 @@ local options = {
 	scrolloff = 8, -- is one of my fav
 	sidescrolloff = 8,
 	guifont = "monospace:h20", -- the font used in graphical neovim applications
+	linespace = 4, -- extra pixel lines between text lines
 }
 
 vim.opt.shortmess:append("c")
@@ -68,12 +69,22 @@ end
 
 require("user.keymaps")
 
+-- Colorscheme (local, see colors/ayu-dark.lua)
+vim.cmd.colorscheme("ayu-dark")
+
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
+	end,
+})
+
+-- Set filetype for terminal buffers (for lualine extension)
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.bo.filetype = "terminal"
 	end,
 })
 
@@ -130,6 +141,22 @@ require("lazy").setup({
 			},
 		},
 
+		{
+			"sindrets/diffview.nvim",
+			opts = {},
+		},
+
+		{
+			"kndndrj/nvim-dbee",
+			dependencies = { "MunifTanjim/nui.nvim" },
+			build = function()
+				require("dbee").install()
+			end,
+			config = function()
+				require("dbee").setup()
+			end,
+		},
+
 		-- {
 		-- 	"folke/which-key.nvim",
 		-- 	event = "VeryLazy",
@@ -169,23 +196,15 @@ require("lazy").setup({
 					},
 					sections = {
 						{ section = "header" },
-						{
-							pane = 2,
-							section = "terminal",
-							cmd = "colorscript -e square",
-							height = 5,
-							padding = 1,
-						},
+						-- spacer: sits the file list vertically centered against the 20 line art
+						{ pane = 2, text = "", padding = 6 },
 						{
 							pane = 2,
 							icon = " ",
 							title = "Recent Files",
 							section = "recent_files",
 							indent = 2,
-							padding = 1,
 						},
-						{ pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-						{ section = "startup" },
 					},
 				},
 			},
@@ -208,6 +227,15 @@ require("lazy").setup({
 						prompt_prefix = "   ",
 						selection_caret = "  ",
 						entry_prefix = "  ",
+						sorting_strategy = "ascending",
+						layout_config = {
+							horizontal = {
+								prompt_position = "top",
+								preview_width = 0.45,
+							},
+							width = 0.87,
+							height = 0.80,
+						},
 						mappings = {
 							i = {
 								["<C-j>"] = actions.move_selection_next,
@@ -217,6 +245,20 @@ require("lazy").setup({
 								["q"] = actions.close,
 								["<C-j>"] = actions.move_selection_next,
 								["<C-k>"] = actions.move_selection_previous,
+							},
+						},
+					},
+					pickers = {
+						find_files = {
+							hidden = true,
+							find_command = {
+								"fdfind",
+								"--type",
+								"f",
+								"--strip-cwd-prefix",
+								"--hidden",
+								"--exclude",
+								".git",
 							},
 						},
 					},
@@ -248,15 +290,24 @@ require("lazy").setup({
 			end,
 		},
 
-		{
-			"projekt0n/github-nvim-theme",
-			name = "github-theme",
-			lazy = false,
-			priority = 1000,
-			config = function()
-				vim.cmd.colorscheme("github_dark_colorblind")
-			end,
-		},
+		-- {
+		-- 	"projekt0n/github-nvim-theme",
+		-- 	name = "github-theme",
+		-- 	lazy = false,
+		-- 	priority = 1000,
+		-- 	config = function()
+		-- 		vim.cmd.colorscheme("github_dark_colorblind")
+		-- 	end,
+		-- },
+
+		-- {
+		-- 	"nyoom-engineering/oxocarbon.nvim",
+		-- 	lazy = false,
+		-- 	priority = 1000,
+		-- 	config = function()
+		-- 		vim.cmd("colorscheme oxocarbon")
+		-- 	end,
+		-- },
 
 		-- {
 		-- 	"dgox16/oldworld.nvim",
@@ -268,7 +319,7 @@ require("lazy").setup({
 		-- },
 
 		{
-			"echasnovski/mini.nvim",
+			"nvim-mini/mini.nvim",
 			config = function()
 				local animate = require("mini.animate")
 				animate.setup({
@@ -285,7 +336,52 @@ require("lazy").setup({
 		{
 			"nvim-lualine/lualine.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
-			opts = {},
+			opts = {
+				options = {
+					theme = require("user.lualine_ayu"),
+					section_separators = { left = "", right = "" },
+					component_separators = { left = "", right = "" },
+				},
+				sections = {
+					lualine_x = {
+						{
+							function()
+								local clients = vim.lsp.get_clients({ bufnr = 0 })
+								if #clients == 0 then
+									return "󱏎 No LSP"
+								end
+								local names = {}
+								for _, client in ipairs(clients) do
+									table.insert(names, client.name)
+								end
+								return "󰒋 " .. table.concat(names, ", ")
+							end,
+							color = function()
+								local clients = vim.lsp.get_clients({ bufnr = 0 })
+								if #clients == 0 then
+									return { fg = "#d95757" }
+								end
+								return { fg = "#aad94c" }
+							end,
+						},
+						"encoding",
+						"fileformat",
+						"filetype",
+					},
+				},
+				extensions = {
+					{
+						filetypes = { "toggleterm", "terminal" },
+						sections = {
+							lualine_a = {
+								function()
+									return "TERMINAL"
+								end,
+							},
+						},
+					},
+				},
+			},
 		},
 
 		{
@@ -294,7 +390,7 @@ require("lazy").setup({
 				"mason-org/mason.nvim",
 				"mason-org/mason-lspconfig.nvim",
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				"j-hui/fidget.nvim",
+				{ "j-hui/fidget.nvim", opts = {} },
 				"saghen/blink.cmp",
 			},
 			config = function()
@@ -382,7 +478,7 @@ require("lazy").setup({
 				local ensure_installed = vim.tbl_keys({})
 				vim.list_extend(ensure_installed, {
 					"stylua",
-					-- "elixir-ls",
+					-- "expert",
 					"prettierd",
 					-- "prettier",
 					"lua-language-server",
@@ -424,11 +520,11 @@ require("lazy").setup({
 			opts_extend = { "sources.default" },
 		},
 
-		-- {
-		-- 	"pmizio/typescript-tools.nvim",
-		-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		-- 	opts = {},
-		-- },
+		{
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			opts = {},
+		},
 
 		{
 			"stevearc/conform.nvim",
@@ -456,14 +552,31 @@ require("lazy").setup({
 
 		{
 			"nvim-treesitter/nvim-treesitter",
+			lazy = false,
 			build = ":TSUpdate",
-			main = "nvim-treesitter.configs",
-			opts = {
-				ensure_installed = { "lua", "rust", "javascript", "typescript", "tsx" },
-				auto_install = true,
-				highlight = { enable = true },
-				indent = { enable = true },
-			},
+			config = function()
+				require("nvim-treesitter").setup({
+					ensure_installed = {
+						"lua",
+						"rust",
+						"javascript",
+						"typescript",
+						"tsx",
+						"markdown",
+						"markdown_inline",
+						"elixir",
+						"heex",
+						"eex",
+					},
+					auto_install = true,
+				})
+				vim.api.nvim_create_autocmd("FileType", {
+					pattern = "*",
+					callback = function()
+						pcall(vim.treesitter.start)
+					end,
+				})
+			end,
 		},
 
 		{
@@ -499,6 +612,7 @@ require("lazy").setup({
 
 				lint.linters_by_ft = {
 					markdown = {},
+					elixir = { "credo" },
 				}
 
 				vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -534,25 +648,43 @@ require("lazy").setup({
 		},
 
 		{
+			"MeanderingProgrammer/render-markdown.nvim",
+			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+			ft = { "markdown" },
+			opts = {
+				heading = {
+					icons = { "󰎤 ", "󰎧 ", "󰎪 ", "󰎭 ", "󰎱 ", "󰎳 " },
+				},
+				code = {
+					sign = false,
+					width = "block",
+					right_pad = 1,
+				},
+				checkbox = {
+					unchecked = { icon = "󰄱 " },
+					checked = { icon = "󰄵 " },
+				},
+			},
+		},
+
+		{
 			"mrcjkb/rustaceanvim",
 			version = "^5",
 			lazy = false,
 		},
 
-		-- {
-		-- 	"supermaven-inc/supermaven-nvim",
-		-- 	opts = {},
-		-- },
+		{
+			"supermaven-inc/supermaven-nvim",
+			opts = {},
+		},
 
 		{
-			"olimorris/codecompanion.nvim",
-			opts = {
-				ignore_warnings = true,
-			},
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"github/copilot.vim",
-			},
+			"greggh/claude-code.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
+			config = function()
+				vim.keymap.set("n", "<leader>cc", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+				require("claude-code").setup()
+			end,
 		},
 
 		{
@@ -562,10 +694,35 @@ require("lazy").setup({
 		},
 
 		{
+			"mrjones2014/smart-splits.nvim",
+			config = function()
+				local ss = require("smart-splits")
+				ss.setup({
+					ignored_filetypes = { "nofile", "quickfix", "prompt" },
+					ignored_buftypes = { "NvimTree" },
+				})
+
+				-- Resizing splits
+				vim.keymap.set("n", "<C-Left>", ss.resize_left, { desc = "Resize split left" })
+				vim.keymap.set("n", "<C-Down>", ss.resize_down, { desc = "Resize split down" })
+				vim.keymap.set("n", "<C-Up>", ss.resize_up, { desc = "Resize split up" })
+				vim.keymap.set("n", "<C-Right>", ss.resize_right, { desc = "Resize split right" })
+			end,
+		},
+
+		{
 			"akinsho/bufferline.nvim",
 			version = "*",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			opts = {},
+		},
+
+		{
+			"catgoose/nvim-colorizer.lua",
+			event = { "BufReadPre" },
+			opts = {
+				parsers = { css = true, tailwind = { enabled = true, lsp = true } },
+			},
 		},
 	},
 

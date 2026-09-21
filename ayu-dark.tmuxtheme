@@ -1,0 +1,117 @@
+# Name: Ayu
+# Variant: Dark
+# URL: https://github.com/ayu-theme/ayu-colors
+# Description: The dark ayu palette, matched to config/nvim/colors/ayu-dark.lua
+# Note: hexes are lower case, and inside #{?...} conditionals a literal "#" has
+#       to be written "##" and a literal "," has to be written "#," — which is
+#       why the pills below are spelled "#$var" and "#,".
+
+# -- palette -------------------------------------------------------------------
+
+ayu_bg="#0b0e14"          # editor background
+ayu_bg_dim="#0d1017"      # ui background
+ayu_panel="#0f131a"       # panels
+ayu_line="#131721"        # current line
+ayu_ui_1="#1c2028"        # borders
+ayu_ui_2="#22262f"        # raised surface (active window pill)
+ayu_fg="#bfbdb6"
+ayu_fg_dim="#565b66"
+ayu_comment="#636a72"
+ayu_gutter="#6c7380"
+
+ayu_accent="#e6b450"      # the ayu gold
+ayu_orange="#ff8f40"
+ayu_func="#ffb454"
+ayu_operator="#f29668"
+ayu_blue="#59c2ff"
+ayu_cyan="#39bae6"
+ayu_green="#aad94c"
+ayu_mint="#95e6cb"
+ayu_purple="#d2a6ff"
+ayu_red="#f07178"
+ayu_error="#d95757"
+
+# -- status bar ----------------------------------------------------------------
+
+set -g status on
+set -g status-position bottom
+set -g status-interval 5
+set -g status-justify left
+set -g status-style "fg=$ayu_fg,bg=$ayu_bg"
+set -g status-left-length 100
+set -g status-right-length 140
+
+# -- session pill --------------------------------------------------------------
+# gold normally, orange while the prefix is held, purple in copy-mode.
+
+pill_normal="#[fg=#$ayu_accent#,bg=#$ayu_bg]#[fg=#$ayu_bg#,bg=#$ayu_accent#,bold]  #S #[fg=#$ayu_accent#,bg=#$ayu_bg#,nobold]"
+pill_prefix="#[fg=#$ayu_orange#,bg=#$ayu_bg]#[fg=#$ayu_bg#,bg=#$ayu_orange#,bold]  #S #[fg=#$ayu_orange#,bg=#$ayu_bg#,nobold]"
+pill_copy="#[fg=#$ayu_purple#,bg=#$ayu_bg]#[fg=#$ayu_bg#,bg=#$ayu_purple#,bold]  #S #[fg=#$ayu_purple#,bg=#$ayu_bg#,nobold]"
+
+set -g status-left "#{?client_prefix,$pill_prefix,#{?pane_in_mode,$pill_copy,$pill_normal}}  "
+
+# -- windows -------------------------------------------------------------------
+
+setw -g window-status-separator ""
+setw -g window-status-style "fg=$ayu_comment,bg=$ayu_bg,none"
+setw -g window-status-activity-style "fg=$ayu_operator,bg=$ayu_bg,none"
+setw -g window-status-bell-style "fg=$ayu_error,bg=$ayu_bg,none"
+
+setw -g window-status-format "#[fg=$ayu_fg_dim,bg=$ayu_bg] #I #[fg=$ayu_comment]#W#{?window_zoomed_flag, ,}#{?window_last_flag, ,} "
+setw -g window-status-current-format "#[fg=$ayu_ui_2,bg=$ayu_bg]#[fg=$ayu_accent,bg=$ayu_ui_2,bold] #I #[fg=$ayu_fg,bg=$ayu_ui_2,nobold]#W#{?window_zoomed_flag, ,} #[fg=$ayu_ui_2,bg=$ayu_bg,nobold]"
+
+# -- right side ----------------------------------------------------------------
+# git branch (hidden outside a repo) · current directory · clock pill
+
+git_branch="#(cd '#{pane_current_path}' && git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+git_segment="#{?#{==:$git_branch,},,#[fg=#$ayu_green] $git_branch #[fg=#$ayu_ui_2]│}"
+
+set -g status-right "$git_segment#[fg=$ayu_blue] #{b:pane_current_path} #[fg=$ayu_accent,bg=$ayu_bg]#[fg=$ayu_bg,bg=$ayu_accent,bold] %H:%M #[fg=$ayu_accent,bg=$ayu_bg,nobold]"
+
+# -- panes ---------------------------------------------------------------------
+
+set -g pane-border-style "fg=$ayu_ui_1"
+set -g pane-active-border-style "fg=$ayu_accent"
+set -g pane-border-lines single
+set -g display-panes-colour "$ayu_fg_dim"
+set -g display-panes-active-colour "$ayu_accent"
+
+# -- messages & modes ----------------------------------------------------------
+
+set -g message-style "fg=$ayu_accent,bg=$ayu_panel,bold"
+set -g message-command-style "fg=$ayu_green,bg=$ayu_panel,bold"
+setw -g mode-style "fg=$ayu_bg,bg=$ayu_purple,bold"
+setw -g clock-mode-colour "$ayu_accent"
+set -g copy-mode-match-style "fg=$ayu_bg,bg=$ayu_func"
+set -g copy-mode-current-match-style "fg=$ayu_bg,bg=$ayu_accent"
+
+# -- cleanup -------------------------------------------------------------------
+# the assignments above land in tmux's global environment (and would be
+# inherited by every new pane), so drop them now that they have been expanded
+
+set-environment -gu ayu_bg
+set-environment -gu ayu_bg_dim
+set-environment -gu ayu_panel
+set-environment -gu ayu_line
+set-environment -gu ayu_ui_1
+set-environment -gu ayu_ui_2
+set-environment -gu ayu_fg
+set-environment -gu ayu_fg_dim
+set-environment -gu ayu_comment
+set-environment -gu ayu_gutter
+set-environment -gu ayu_accent
+set-environment -gu ayu_orange
+set-environment -gu ayu_func
+set-environment -gu ayu_operator
+set-environment -gu ayu_blue
+set-environment -gu ayu_cyan
+set-environment -gu ayu_green
+set-environment -gu ayu_mint
+set-environment -gu ayu_purple
+set-environment -gu ayu_red
+set-environment -gu ayu_error
+set-environment -gu pill_normal
+set-environment -gu pill_prefix
+set-environment -gu pill_copy
+set-environment -gu git_branch
+set-environment -gu git_segment

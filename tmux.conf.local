@@ -13,7 +13,9 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set-option -g detach-on-destroy off
 
 # Themes pack
-set -g @plugin 'jimeh/tmux-themepack'
+# NOTE: disabled — themepack applies its default theme when TPM runs, which
+# overrides any theme sourced from this file.
+# set -g @plugin 'jimeh/tmux-themepack'
 
 # Themes
 
@@ -35,7 +37,12 @@ set -g @plugin 'jimeh/tmux-themepack'
 # set -g @catppuccin_status_modules_right ''
 
 # Flexoki Dark
-source-file ./flexoki-dark.tmuxtheme
+# source-file ./flexoki-dark.tmuxtheme
+
+# Ayu Dark
+# oh-my-tmux applies its own theme after this file is sourced, so turn it off
+# and let ayu-dark.tmuxtheme (sourced at the bottom) own the status bar
+tmux_conf_theme="disabled"
 
 # End of themes
 
@@ -45,4 +52,7 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
 
 run '~/.tmux/plugins/tpm/tpm'
+
+# Theme last, so it wins over anything a plugin sets
+source-file ./ayu-dark.tmuxtheme
 
