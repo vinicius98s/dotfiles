@@ -3,6 +3,9 @@ set-option -sg escape-time 0
 
 set -g mode-keys vi
 
+# Leave the terminal window title alone (oh-my-tmux turns this on)
+set -g set-titles off
+
 # TPM
 set -g @plugin 'tmux-plugins/tpm'
 
@@ -53,6 +56,10 @@ set -g @continuum-restore 'on'
 
 run '~/.tmux/plugins/tpm/tpm'
 
-# Theme last, so it wins over anything a plugin sets
-source-file ./ayu-dark.tmuxtheme
+# Theme last, so it wins over anything a plugin sets.
+# NOTE: a relative path here resolves against the CURRENT WORKING DIRECTORY of
+# whoever starts tmux, not against this file — so it silently fails when the
+# server is started at boot (by tmux-continuum) from / or $HOME. Resolve the
+# repo through the ~/.tmux.conf.local symlink instead.
+run 'tmux source-file "$(dirname "$(readlink -f "$TMUX_CONF_LOCAL")")/ayu-dark.tmuxtheme"'
 

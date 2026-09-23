@@ -5,6 +5,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # ZSH_THEME="ultima"
 ZSH_THEME="ayu-dark"
 
+# Don't let oh-my-zsh rename the terminal window/tab per directory or command
+DISABLE_AUTO_TITLE="true"
+
 plugins=(git kubectl direnv)
 
 source $ZSH/oh-my-zsh.sh
